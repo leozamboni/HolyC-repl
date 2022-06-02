@@ -1,0 +1,3 @@
+[submodule "holyc-interpreter"] 
+  path = holyc-interpreter
+  url = https://github.com/leozamboni/holyc-interpreter

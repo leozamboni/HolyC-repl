@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ $# -eq 0 ] 
+then
+    node holy-node.js cli
+else
+    node holy-node.js scan "$(cat $1)"
+fi
