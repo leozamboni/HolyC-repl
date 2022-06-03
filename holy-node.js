@@ -4,7 +4,7 @@
  * @fileoverview JS HolyC Interpreter
  * @version 0.0.0
  */
-import { clruntime } from './holyc-interpreter/holyc-interpreter.js'
+import { holy_node } from './holyc-interpreter/holyc-interpreter.js'
 import * as readline from 'node:readline/promises';
 import { stdin as input, stdout as output } from 'node:process';
 
@@ -18,7 +18,7 @@ const cli = async () => {
 
     while (1) {
         file += await rl.question('> ');
-        console.log(clruntime(file));
+        console.log(holy_node(file));
     }
 
     rl.close();
@@ -28,7 +28,7 @@ const run = (runtime, stdin) => {
     if (runtime === "cli") {
         cli();
     } else {
-        console.log(clruntime(stdin))
+        console.log(holy_node(stdin))
     }
 }
 

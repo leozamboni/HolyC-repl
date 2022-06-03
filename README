@@ -1,0 +1,9 @@
+# Very experimental backend HolyC runtime.
+
+web sandbox runtime: github.com/leozamboni/holy-interpreter
+
+# install
+
+```
+chmod +x holy-node; export PATH=$PATH:$PWD; holy-node example.HC
+```
