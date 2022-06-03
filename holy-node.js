@@ -17,7 +17,9 @@ const cli = async () => {
     let file = '';
 
     while (1) {
-        file += await rl.question('> ');
+        const input = await rl.question('> ');
+        if (input === ".exit") break;
+        file += input;
         console.log(holy_node(file));
     }
 
