@@ -1,3 +1,10 @@
 {
-    "type": "module"
+    "type": "module",
+    "name": "holy-node",
+    "version": "0.0.1",
+    "description": "Backend HolyC runtime",
+    "main": "holy-node.js",
+    "repository": "https://github.com/leozamboni/holy-node",
+    "author": "leozamboni",
+    "license": "MIT"
 }
