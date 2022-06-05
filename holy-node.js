@@ -14,12 +14,9 @@ import { stdin as input, stdout as output } from 'node:process';
 const cli = async () => {
     const rl = readline.createInterface({ input, output });
 
-    let file = '';
-
     while (1) {
         const input = await rl.question('> ');
         if (input === ".exit") break;
-        file += input;
         console.log(holy_node_cli(input));
     }
 
