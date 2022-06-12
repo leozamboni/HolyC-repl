@@ -4,20 +4,20 @@
  * @fileoverview JS HolyC Interpreter
  * @version 0.0.0
  */
-import { holy_node_cli, holy_node_scan } from './holyc-interpreter/holyc-interpreter.js'
+import { holy_node_interactive, holy_node_script } from './holyc-interpreter/holyc-interpreter.js'
 import * as readline from 'node:readline/promises';
 import { stdin as input, stdout as output } from 'node:process';
 
 /**
- * Command line interface
+ * Interactive mode
  */
-const cli = async () => {
+const interactive = async () => {
     const rl = readline.createInterface({ input, output });
 
     while (1) {
         const input = await rl.question('> ');
         if (input === ".exit") break;
-        console.log(holy_node_cli(input));
+        console.log(holy_node_interactive(input));
     }
 
     rl.close();
@@ -25,9 +25,9 @@ const cli = async () => {
 
 const run = (runtime, stdin) => {
     if (runtime === "cli") {
-        cli();
+        interactive();
     } else {
-        console.log(holy_node_scan(stdin))
+        console.log(holy_node_script(stdin))
     }
 }
 
