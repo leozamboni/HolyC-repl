@@ -16,7 +16,7 @@ const interactive = async () => {
 
     while (1) {
         const input = await rl.question('> ');
-        if (input === ".exit") break;
+        if (input === "exit;") break;
         console.log(holy_node_interactive(input));
     }
 
