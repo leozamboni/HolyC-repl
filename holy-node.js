@@ -1,33 +1,31 @@
 /**
  * @Copyright Leonardo Z. Nunes 2022
  * @license MIT
- * @fileoverview JS HolyC Interpreter
+ * @fileoverview HolyNode
  * @version 0.0.0
  */
-import { holy_node_interactive, holy_node_script } from './holyc-interpreter/holyc-interpreter.js'
-import * as readline from 'node:readline/promises';
+import { holy_node_idle, holy_node_script } from './HolyJS/holy.js'
+import * as readline from 'node:readline';
 import { stdin as input, stdout as output } from 'node:process';
 
-/**
- * Interactive mode
- */
-const interactive = async () => {
+
+const idle = async () => {
     const rl = readline.createInterface({ input, output });
 
     while (1) {
         const input = await rl.question('> ');
         if (input === "exit;") break;
-        console.log(holy_node_interactive(input));
+        console.log(await holy_node_idle(input));
     }
 
     rl.close();
 }
 
-const run = (runtime, stdin) => {
+const run = async (runtime, stdin) => {
     if (runtime === "cli") {
-        interactive();
+        idle();
     } else {
-        console.log(holy_node_script(stdin))
+        console.log(await holy_node_script(stdin))
     }
 }
 
@@ -36,4 +34,4 @@ const run = (runtime, stdin) => {
  * @arg {string} process.argv[2] which runtime
  * @arg {string} process.argv[3] file
  */
-run(process.argv[2], process.argv[3]);
+await run(process.argv[2], process.argv[3]);

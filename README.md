@@ -1,6 +1,6 @@
 # Experimental backend HolyC runtime
 
-web sandbox runtime: github.com/leozamboni/holyc-interpreter
+[HolyC Interpreter](github.com/TempleWeb/HolyJS)
 
 # Clone and Install
 

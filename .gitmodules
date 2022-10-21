@@ -1,3 +1,3 @@
-[submodule "holyc-interpreter"] 
-  path = holyc-interpreter
-  url = https://github.com/leozamboni/holyc-interpreter
+[submodule "HolyJS"]
+	path = HolyJS
+	url = https://github.com/TempleWeb/HolyJS
