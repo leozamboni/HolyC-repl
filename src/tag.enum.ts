@@ -1,0 +1,15 @@
+export enum Tag {
+  AND = 256,
+  OR,
+  EQ,
+  NE,
+  LE,
+  GE,
+  TRUE,
+  FALSE,
+  GR,
+  LS,
+  NUM,
+  FLOAT,
+  ID,
+}
