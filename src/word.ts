@@ -1,4 +1,4 @@
-import { Tag } from "./tag.enum";
+import { Tag } from "./tag";
 import { Token } from "./token.js";
 
 export class Word extends Token {

@@ -1,4 +1,4 @@
-import { Tag } from "./tag.enum.js";
+import { Tag } from "./tag.js";
 import { Token } from "./token.js";
 
 export class Float extends Token {

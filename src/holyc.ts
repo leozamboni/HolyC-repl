@@ -6,7 +6,6 @@ class HolyC {
     Files.stdin = process.argv[2];
     const lexer = new Lexer();
     console.log(lexer.lex().k);
-    console.log(lexer.lex().k);
   }
 }
 new HolyC();

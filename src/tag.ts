@@ -12,4 +12,5 @@ export enum Tag {
   NUM,
   FLOAT,
   ID,
+  DTYPE,
 }

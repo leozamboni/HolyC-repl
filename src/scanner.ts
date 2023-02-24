@@ -1,7 +1,7 @@
 import { Files } from "./files.js";
 import { Num } from "./num.js";
 import { Float } from "./real.js";
-import { Tag } from "./tag.enum.js";
+import { Tag } from "./tag.js";
 import { Token } from "./token.js";
 import { Word } from "./word.js";
 
@@ -20,6 +20,7 @@ export class Scanner {
     return this.k === c;
   }
   scan(cases: { key: () => Word }[]) {
+    this.read();
     while (this.ignore.includes(this.k)) this.read();
     const f = cases[this.k];
     if (f) return f();
@@ -40,17 +41,19 @@ export class Scanner {
       }
       return new Float(x);
     }
-    if (this.k && /[a-z]/i.test(this.k)) {
+    if (this.k && /[a-zA-Z]/i.test(this.k)) {
       let b = "";
       do {
         b += this.k;
         this.read();
-      } while (/[a-z0-9]/i.test(this.k));
+      } while (this.k && /[a-zA-Z0-9]/i.test(this.k));
       const s = b;
       let w = this.words.get(s);
       if (w) return w;
       w = new Word(s, Tag.ID);
       this.words.set(s, w);
+      const f = cases[s];
+      if (f) return f();
       return w;
     }
     const tok = new Token(this.k);
