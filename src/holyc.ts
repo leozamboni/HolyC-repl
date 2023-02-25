@@ -5,7 +5,10 @@ class HolyC {
   constructor() {
     Files.stdin = process.argv[2];
     const lexer = new Lexer();
-    console.log(lexer.lex().k);
+    while (lexer.i < Files.stdin.length) {
+      // lexer.lex();
+      console.log(lexer.lex()?.k);
+    }
   }
 }
 new HolyC();
