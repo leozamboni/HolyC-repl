@@ -1,14 +1,13 @@
+import { Compiler } from "./compiler";
 import { Files } from "./files";
-import { Lexer } from "./lexer";
 
 class HolyC {
+  compiler: Compiler;
   constructor() {
     Files.stdin = process.argv[2];
-    const lexer = new Lexer();
-    while (lexer.i < Files.stdin.length) {
-      // lexer.lex();
-      console.log(lexer.lex()?.k);
-    }
+
+    this.compiler = new Compiler();
+    this.compiler.run();
   }
 }
 new HolyC();

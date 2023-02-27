@@ -3,8 +3,8 @@ import { Word } from "../word";
 import { Feat } from "./feat";
 
 export class False extends Feat {
-  constructor(l?, p?, g?) {
-    super(l, p, g);
+  constructor(c) {
+    super(c);
   }
   static k = "FALSE";
   lex() {
@@ -13,7 +13,7 @@ export class False extends Feat {
   parse() {
     throw new Error("Method not implemented.");
   }
-  gen() {
+  eval() {
     throw new Error("Method not implemented.");
   }
 }

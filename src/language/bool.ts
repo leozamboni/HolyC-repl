@@ -3,17 +3,20 @@ import { Type } from "../type";
 import { Feat } from "./feat";
 
 export class Bool extends Feat {
-  constructor(l?, p?, g?) {
-    super(l, p, g);
+  constructor(c) {
+    super(c);
   }
   static k = "Bool";
   lex() {
     return new Type("Bool", Tag.DTYPE);
   }
   parse() {
-    throw new Error("Method not implemented.");
+    this.node(Tag.ID);
+    this.node("=");
+    this.node([Tag.FALSE, Tag.TRUE]);
+    this.node(";");
   }
-  gen() {
+  eval() {
     throw new Error("Method not implemented.");
   }
 }

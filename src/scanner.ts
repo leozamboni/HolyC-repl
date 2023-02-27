@@ -1,9 +1,9 @@
 import { Files } from "./files.js";
+import { Feat } from "./language/feat.js";
 import { Num } from "./num.js";
 import { Float } from "./real.js";
 import { Tag } from "./tag.js";
 import { Token } from "./token.js";
-import { Type } from "./type.js";
 import { Word } from "./word.js";
 
 export class Scanner {
@@ -20,7 +20,7 @@ export class Scanner {
     this.read();
     return this.k === c;
   }
-  scan(cases: { key: () => Token | Word | Type }[]) {
+  scan(cases: () => Feat[]) {
     this.read();
     while (this.ignore.includes(this.k)) this.read();
     const f = cases[this.k];
@@ -56,7 +56,7 @@ export class Scanner {
       w = new Word(s, Tag.ID);
       this.words.set(s, w);
       const f = cases[s];
-      if (f) new f(this).lex();
+      if (f) return new f(this).lex();
       return w;
     }
     const tok = new Token(this.k);

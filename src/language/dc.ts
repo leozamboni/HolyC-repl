@@ -2,8 +2,8 @@ import { Token } from "../token";
 import { Feat } from "./feat";
 
 export class Dc extends Feat {
-  constructor(l?, p?, g?) {
-    super(l, p, g);
+  constructor(c) {
+    super(c);
   }
   static k = ";";
   lex() {
@@ -12,7 +12,7 @@ export class Dc extends Feat {
   parse() {
     throw new Error("Method not implemented.");
   }
-  gen() {
+  eval() {
     throw new Error("Method not implemented.");
   }
 }
