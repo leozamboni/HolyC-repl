@@ -17,6 +17,16 @@ export class Bool extends Feat {
     this.node(";");
   }
   eval() {
-    throw new Error("Method not implemented.");
+    const id = this.w[0].k;
+    let value = this.w[2];
+    switch (value.t) {
+      case Tag.FALSE:
+        value = "false";
+        break;
+      case Tag.TRUE:
+        value = "true";
+        break;
+    }
+    this.emit("let " + id + ": Boolean = " + value + ";");
   }
 }

@@ -1,13 +1,13 @@
 import { Compiler } from "../compiler";
+import { TokenType } from "../interface";
 import { Tag } from "../tag";
-import { Token } from "../token";
-import { Type } from "../type";
-import { Word } from "../word";
 
 export abstract class Feat {
   c: Compiler;
+  w: TokenType[];
   constructor(c) {
     this.c = c;
+    this.w = [];
   }
   node(T: Tag | Tag[] | string) {
     const tk = this.c.lex();
@@ -15,7 +15,6 @@ export abstract class Feat {
     if (!val) {
       val = tk.k;
     }
-
     if (Array.isArray(T)) {
       if (!T.includes(val))
         throw new Error("unexpected token " + tk.k + " in line " + this.c.i);
@@ -23,8 +22,12 @@ export abstract class Feat {
       if (val !== T)
         throw new Error("unexpected token  " + tk.k + " in line " + this.c.i);
     }
+    this.w.push(tk);
   }
-  abstract lex(): Token | Word | Type;
+  emit(str) {
+    console.log(str);
+  }
+  abstract lex(): TokenType;
   abstract parse();
   abstract eval();
 }

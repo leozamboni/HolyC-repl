@@ -1,13 +1,13 @@
+import { Eval } from "./eval";
 import { Files } from "./files";
-import { Parser } from "./parser";
 
-export class Compiler extends Parser {
+export class Compiler extends Eval {
   constructor() {
     super();
   }
   run() {
     while (this.i < Files.stdin.length) {
-      this.parse(this.lex());
+      this.eval(this.parse(this.lex()));
     }
   }
 }

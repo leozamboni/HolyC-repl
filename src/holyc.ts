@@ -5,7 +5,6 @@ class HolyC {
   compiler: Compiler;
   constructor() {
     Files.stdin = process.argv[2];
-
     this.compiler = new Compiler();
     this.compiler.run();
   }
