@@ -10,16 +10,17 @@ export class Bool extends Feat {
   lex() {
     return new Type("Bool", Tag.DTYPE);
   }
-  parse() {
-    this.node(Tag.ID);
-    this.node("=");
-    this.node([Tag.FALSE, Tag.TRUE]);
-    this.node(";");
+  parse(tk) {
+    this.root(tk, Tag.DTYPE);
+    this.edge(Tag.ID);
+    this.edge("=");
+    this.edge([Tag.FALSE, Tag.TRUE]);
+    this.edge(";");
   }
   eval() {
-    const id = this.w[0].k;
-    let value = this.w[2];
-    switch (value.t) {
+    const id = this.w[1].k;
+    let value;
+    switch ((this.w[3] as any)?.t) {
       case Tag.FALSE:
         value = "false";
         break;
@@ -27,6 +28,6 @@ export class Bool extends Feat {
         value = "true";
         break;
     }
-    this.emit("let " + id + ": Boolean = " + value + ";");
+    return this.emit("let " + id + " = " + value + ";\n");
   }
 }

@@ -1,6 +1,7 @@
 import { Compiler } from "../compiler";
 import { TokenType } from "../interface";
 import { Tag } from "../tag";
+import { Word } from "../word";
 
 export abstract class Feat {
   c: Compiler;
@@ -9,7 +10,13 @@ export abstract class Feat {
     this.c = c;
     this.w = [];
   }
-  node(T: Tag | Tag[] | string) {
+  root(tk: Word, T: Tag | Tag[] | string) {
+    if (tk.t !== T) {
+      throw new Error("unexpected token " + tk.k + " in line " + this.c.l);
+    }
+    this.w.push(tk);
+  }
+  edge(T: Tag | Tag[] | string) {
     const tk = this.c.lex();
     let val = tk.t;
     if (!val) {
@@ -17,17 +24,17 @@ export abstract class Feat {
     }
     if (Array.isArray(T)) {
       if (!T.includes(val))
-        throw new Error("unexpected token " + tk.k + " in line " + this.c.i);
+        throw new Error("unexpected token " + tk.k + " in line " + this.c.l);
     } else {
       if (val !== T)
-        throw new Error("unexpected token  " + tk.k + " in line " + this.c.i);
+        throw new Error("unexpected token " + tk.k + " in line " + this.c.l);
     }
     this.w.push(tk);
   }
   emit(str) {
-    console.log(str);
+    return str;
   }
   abstract lex(): TokenType;
-  abstract parse();
+  abstract parse(t: TokenType);
   abstract eval();
 }

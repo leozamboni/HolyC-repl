@@ -6,6 +6,6 @@ export class Eval extends Parser {
     super();
   }
   eval(t: Feat) {
-    t.eval();
+    return t.eval();
   }
 }

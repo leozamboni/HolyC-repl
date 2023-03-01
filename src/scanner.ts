@@ -8,7 +8,7 @@ import { Word } from "./word.js";
 
 export class Scanner {
   i = 0;
-  l = 0;
+  l = 1;
   t = 0;
   k = "";
   ignore = [" ", "\t", "\n"];
@@ -22,7 +22,21 @@ export class Scanner {
   }
   scan(cases: () => Feat[]) {
     this.read();
-    while (this.ignore.includes(this.k)) this.read();
+    while (this.ignore.includes(this.k)) {
+      if (this.k === "\n") this.l++;
+      this.read();
+    }
+    if (this.k === '"') {
+      let b = "";
+      do {
+        b += this.k;
+        this.read();
+      } while (this.k && this.k !== '"');
+      this.k = b + '"';
+      const f = cases['"'];
+      if (f) return new f(this).lex();
+      return new Word(this.k, Tag.STR);
+    }
     const f = cases[this.k];
     if (f) return new f(this).lex();
     if (/^\d$/.test(this.k)) {

@@ -10,13 +10,14 @@ export class F64 extends Feat {
   lex() {
     return new Type("F64", Tag.DTYPE);
   }
-  parse() {
-    this.node(Tag.ID);
-    this.node("=");
-    this.node(Tag.NUM);
-    this.node(";");
+  parse(tk) {
+    this.root(tk, Tag.DTYPE);
+    this.edge(Tag.ID);
+    this.edge("=");
+    this.edge(Tag.NUM);
+    this.edge(";");
   }
   eval() {
-    throw new Error("Method not implemented.");
+    return this.emit("let " + this.w[1].k + " = " + this.w[3].k + ";\n");
   }
 }
