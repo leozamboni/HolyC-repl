@@ -19,6 +19,8 @@ export class Id extends Feat {
     this.edge(";");
   }
   eval() {
+    console.log(this.w);
+
     return this.emit(this.w[0].k + "();\n");
   }
 }

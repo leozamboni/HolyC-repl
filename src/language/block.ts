@@ -45,6 +45,9 @@ export class Block extends Feat {
           f = new f({ ...this, w: this.w.slice(i, this.w.length) });
           code += f.eval();
         }
+      } else if ((this.w[i] as Word)?.t === Tag.ID) {
+        f = new Id({ ...this, w: this.w.slice(i, this.w.length) });
+        code += f.eval();
       }
       i++;
     }

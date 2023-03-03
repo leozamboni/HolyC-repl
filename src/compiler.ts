@@ -13,5 +13,6 @@ export class Compiler extends Eval {
       this.code += this.eval(this.parse(this.lex()));
     }
     eval(this.code);
+    console.log(this.code);
   }
 }

@@ -21,6 +21,6 @@ export class Str extends Feat {
     this.edge(";");
   }
   eval() {
-    return this.emit("console.log(" + this.w[0].k + ");\n");
+    return this.emit("process.stdout.write(" + this.w[0].k + ");\n");
   }
 }
