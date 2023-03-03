@@ -11,6 +11,8 @@ export class Proc extends Feat {
     return new Block(this.c).parse();
   }
   eval() {
-    return "function " + this.w[1].k + "() {\n" + new Block(this).eval() + "}";
+    return (
+      "function " + this.w[1].k + "() {\n" + new Block(this).eval() + "}\n"
+    );
   }
 }

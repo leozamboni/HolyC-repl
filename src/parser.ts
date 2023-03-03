@@ -1,3 +1,4 @@
+import { Id } from "./language/id";
 import { Lexer } from "./lexer";
 import { Tag } from "./tag";
 import { Token } from "./token";
@@ -9,8 +10,6 @@ export class Parser extends Lexer {
     super();
   }
   parse(t: Token | Word | Type) {
-    console.log(t);
-
     let f = this.cases[t.k];
     if (f) {
       f = new f(this);
@@ -23,6 +22,10 @@ export class Parser extends Lexer {
         f.parse(t);
         return f;
       }
+    } else {
+      f = new Id(this);
+      f.parse(t);
+      return f;
     }
   }
 }
