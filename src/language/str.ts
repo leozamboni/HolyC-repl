@@ -12,9 +12,15 @@ export class Str extends Feat {
   }
   parse(tk) {
     this.root(tk, Tag.STR);
+    if (this.c.checkAhead(",")) {
+      do {
+        this.edge(",");
+        this.edge(Tag.STR);
+      } while (this.c.checkAhead(","));
+    }
     this.edge(";");
   }
   eval() {
-    return this.emit("console.log(" + this.w[0].k + ")");
+    return this.emit("console.log(" + this.w[0].k + ");\n");
   }
 }

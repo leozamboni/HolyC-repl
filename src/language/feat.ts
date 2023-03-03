@@ -3,15 +3,31 @@ import { TokenType } from "../interface";
 import { Tag } from "../tag";
 import { Word } from "../word";
 
+export interface Feat {
+  lex?(): TokenType | void;
+  parse?(t: TokenType): void;
+  eval?(): string | void;
+}
+
 export abstract class Feat {
   c: Compiler;
   w: TokenType[];
-  constructor(c) {
-    this.c = c;
-    this.w = [];
+  constructor(arg) {
+    const intern = arg?.c;
+    if (intern) {
+      this.c = arg.c;
+      this.w = arg.w;
+    } else {
+      this.c = arg;
+      this.w = [];
+    }
   }
   root(tk: Word, T: Tag | Tag[] | string) {
-    if (tk.t !== T) {
+    let val = tk.t;
+    if (!val) {
+      val = tk.k;
+    }
+    if (val !== T) {
       throw new Error("unexpected token " + tk.k + " in line " + this.c.l);
     }
     this.w.push(tk);
@@ -34,7 +50,4 @@ export abstract class Feat {
   emit(str) {
     return str;
   }
-  abstract lex(): TokenType;
-  abstract parse(t: TokenType);
-  abstract eval();
 }

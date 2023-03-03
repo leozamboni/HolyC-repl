@@ -13,7 +13,6 @@ export * from "./u16";
 export * from "./u32";
 export * from "./u64";
 export * from "./and";
-export * from "./dc";
 export * from "./eq";
 export * from "./ge";
 export * from "./le";

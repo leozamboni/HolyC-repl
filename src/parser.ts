@@ -9,6 +9,8 @@ export class Parser extends Lexer {
     super();
   }
   parse(t: Token | Word | Type) {
+    console.log(t);
+
     let f = this.cases[t.k];
     if (f) {
       f = new f(this);

@@ -12,13 +12,11 @@ export class Scanner {
   t = 0;
   k = "";
   ignore = [" ", "\t", "\n"];
-  words = new Map();
   read() {
     this.k = Files.stdin[this.i++];
   }
   checkAhead(c) {
-    this.read();
-    return this.k === c;
+    return Files.stdin[this.i] === c;
   }
   scan(cases: () => Feat[]) {
     this.read();
@@ -26,12 +24,13 @@ export class Scanner {
       if (this.k === "\n") this.l++;
       this.read();
     }
-    if (this.k === '"') {
-      let b = "";
+    if (this.k === '"' || this.k === "'") {
+      let b = '"';
+      this.read();
       do {
         b += this.k;
         this.read();
-      } while (this.k && this.k !== '"');
+      } while (this.k && !(this.k === '"' || this.k === "'"));
       this.k = b + '"';
       const f = cases['"'];
       if (f) return new f(this).lex();
@@ -65,13 +64,9 @@ export class Scanner {
       } while (this.k && /[a-zA-Z0-9]/i.test(this.k));
       this.i--;
       const s = b;
-      let w = this.words.get(s);
-      if (w) return w;
-      w = new Word(s, Tag.ID);
-      this.words.set(s, w);
       const f = cases[s];
       if (f) return new f(this).lex();
-      return w;
+      return new Word(s, Tag.ID);
     }
     const tok = new Token(this.k);
     this.k = "";

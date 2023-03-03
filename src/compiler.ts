@@ -10,9 +10,10 @@ export class Compiler extends Eval {
   }
   run() {
     while (this.i < Files.stdin.length) {
-      this.code += this.eval(this.parse(this.lex()));
+      const code = this.eval(this.parse(this.lex()));
+      console.log(code);
+      this.code += code;
     }
-    console.log(this.code);
     eval(this.code);
   }
 }
