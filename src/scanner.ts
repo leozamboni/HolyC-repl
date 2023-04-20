@@ -4,6 +4,7 @@ import { Num } from "./num.js";
 import { Float } from "./real.js";
 import { Tag } from "./tag.js";
 import { Token } from "./token.js";
+import { Comment } from "./comment.js";
 import { Word } from "./word.js";
 
 export class Scanner {
@@ -23,6 +24,16 @@ export class Scanner {
     while (this.ignore.includes(this.k)) {
       if (this.k === "\n") this.l++;
       this.read();
+    }
+    if (this.k === "/" && this.checkAhead("/")) {
+      let c = "/";
+      this.read();
+      do {
+        c += this.k;
+        this.read();
+      } while ((this?.k as any) !== "\n");
+      this.k = c + "\n";
+      return new Comment(this.k);
     }
     if (this.k === '"' || this.k === "'") {
       let b = '"';

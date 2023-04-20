@@ -1,27 +1,25 @@
-"Holy World\n";
-
+// HolyC Procedures
 U0
-HelloWorld()
+no_args()
 {
-	"Holy World\n";
+	"no args\n";
 }
 
-U0
-World()
+// Function with no args, or just default args can be called without parentheses;
+no_args("*");
+no_args();
+no_args;
+
+U8
+default_args(U8 abc=1, U8 def, U8 ghi=3)
 {
-	'World\n';
+	"arg 1: %d\n", abc;
+	def = def - 2;
+	"arg 2: %d\n", def;
+	"arg 3: %d\n", ghi;
+	return abc + def + ghi;
 }
 
-U0
-Hello()
-{
-	'Ho';
-	'l', 'y';
-	' ';
-	World();
-}
-
-'\t';
-Hello;
-'\n';
-HelloWorld("*");
+// Default args don't have to be on the end. This code is valid:
+U32 default_args_value = default_args(,4);
+"%d", default_args_value;

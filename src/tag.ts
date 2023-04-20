@@ -14,4 +14,5 @@ export enum Tag {
   ID,
   DTYPE,
   STR,
+  COMMENT,
 }
