@@ -1,6 +1,5 @@
 import { Eval } from "./eval";
 import { Files } from "./files";
-import * as ts from "typescript";
 
 export class Compiler extends Eval {
   code: string;

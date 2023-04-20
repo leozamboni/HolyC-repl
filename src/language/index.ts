@@ -19,3 +19,4 @@ export * from "./le";
 export * from "./ne";
 export * from "./or";
 export * from "./str";
+export * from "./comment";
