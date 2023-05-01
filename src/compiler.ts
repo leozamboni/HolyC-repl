@@ -11,7 +11,7 @@ export class Compiler extends Eval {
     while (this.i < Files.stdin.length) {
       this.code += this.eval(this.parse(this.lex()));
     }
-    eval(this.code);
+    //eval(this.code);
     console.log(this.code);
   }
 }
