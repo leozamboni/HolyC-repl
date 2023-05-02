@@ -61,7 +61,7 @@ export class Scanner {
       do {
         b += this.k;
         this.read();
-      } while (this.k && /[a-zA-Z0-9]/i.test(this.k));
+      } while (this.k && /[a-zA-Z0-9_]/i.test(this.k));
       this.i--;
       const s = b;
       const f = cases[s];

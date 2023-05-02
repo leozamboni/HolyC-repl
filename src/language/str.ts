@@ -15,7 +15,7 @@ export class Str extends Feat {
     if (this.c.checkAhead(",")) {
       do {
         this.edge(",");
-        this.edge(Tag.STR);
+        this.edge([Tag.STR, Tag.ID]);
       } while (this.c.checkAhead(","));
     }
     this.edge(";");

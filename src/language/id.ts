@@ -6,6 +6,7 @@ export class Id extends Feat {
     super(c);
   }
   parse(tk) {
+    console.log(tk);
     this.root(tk, Tag.ID);
     if (this.c.checkAhead("(")) {
       this.edge("(");
