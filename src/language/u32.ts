@@ -9,13 +9,13 @@ export class U32 extends Feat {
   }
   static k = "U32";
   lex() {
-    return new Type("U32", Tag.DTYPE);
+    return Type.u32;
   }
   parse(tk) {
     this.root(tk, Tag.DTYPE);
     this.edge(Tag.ID);
     if (this.c.k === "(") {
-      this.w.push(...new Proc(this.c).parse());
+      this.w.push(...new Proc(this.c).parse(this.c.lex()));
     } else {
       this.edge("=");
       this.edge(Tag.NUM);

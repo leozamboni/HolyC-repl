@@ -1,8 +1,7 @@
 import { Tag } from "../tag";
-import { Token } from "../token";
 import { Word } from "../word";
 import { Feat } from "./feat";
-
+import { Math } from "../math";
 export class Comment extends Feat {
   constructor(c) {
     super(c);
@@ -18,7 +17,7 @@ export class Comment extends Feat {
       } while ((this?.c.k as any) !== "\n");
       this.c.k = c + "\n";
       return new Word(this.c.k, Tag.COMMENT);
-    } else return new Token("/");
+    } else return Math.div;
   }
   parse(tk) {
     this.root(tk, Tag.COMMENT);

@@ -15,4 +15,5 @@ export enum Tag {
   DTYPE,
   STR,
   COMMENT,
+  MATH,
 }

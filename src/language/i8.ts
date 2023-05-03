@@ -9,13 +9,13 @@ export class I8 extends Feat {
   }
   static k = "I8";
   lex() {
-    return new Type("I8", Tag.DTYPE);
+    return Type.i8;
   }
   parse(tk) {
     this.root(tk, Tag.DTYPE);
     this.edge(Tag.ID);
     if (this.c.k === "(") {
-      this.w.push(...new Proc(this.c).parse());
+      this.w.push(...new Proc(this.c).parse(this.c.lex()));
     } else {
       this.edge("=");
       this.edge(Tag.NUM);

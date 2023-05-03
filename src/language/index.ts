@@ -20,3 +20,6 @@ export * from "./ne";
 export * from "./or";
 export * from "./str";
 export * from "./comment";
+export * from "./add";
+export * from "./mul";
+export * from "./sub";

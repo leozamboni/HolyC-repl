@@ -9,13 +9,13 @@ export class I16 extends Feat {
   }
   static k = "I16";
   lex() {
-    return new Type("I16", Tag.DTYPE);
+    return Type.i16;
   }
   parse(tk) {
     this.root(tk, Tag.DTYPE);
     this.edge(Tag.ID);
     if (this.c.k === "(") {
-      this.w.push(...new Proc(this.c).parse());
+      this.w.push(...new Proc(this.c).parse(this.c.lex()));
     } else {
       this.edge("=");
       this.edge(Tag.NUM);

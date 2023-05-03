@@ -9,13 +9,13 @@ export class U0 extends Feat {
   }
   static k = "U0";
   lex() {
-    return new Type("U0", Tag.DTYPE);
+    return Type.u0;
   }
   parse(tk) {
     this.root(tk, Tag.DTYPE);
     this.edge(Tag.ID);
     if (this.c.k === "(") {
-      this.w.push(...new Proc(this.c).parse());
+      this.w.push(...new Proc(this.c).parse(this.c.lex()));
     } else {
       this.edge("=");
       this.edge(Tag.NUM);

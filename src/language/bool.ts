@@ -8,7 +8,7 @@ export class Bool extends Feat {
   }
   static k = "Bool";
   lex() {
-    return new Type("Bool", Tag.DTYPE);
+    return Type.bool;
   }
   parse(tk) {
     this.root(tk, Tag.DTYPE);

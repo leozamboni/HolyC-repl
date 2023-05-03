@@ -6,8 +6,8 @@ export class Proc extends Feat {
   constructor(c) {
     super(c);
   }
-  parse() {
-    this.root(this.c.lex(), "(");
+  parse(tk) {
+    this.root(tk, "(");
     if (this.c.checkAhead(")")) {
       this.edge(")");
     } else {

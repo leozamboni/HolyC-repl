@@ -27,8 +27,12 @@ export abstract class Feat {
     if (!val) {
       val = tk.k;
     }
-    if (val !== T) {
-      throw new Error("unexpected token " + tk.k + " in line " + this.c.l);
+    if (Array.isArray(T)) {
+      if (!T.includes(val))
+        throw new Error("unexpected token " + tk.k + " in line " + this.c.l);
+    } else {
+      if (val !== T)
+        throw new Error("unexpected token " + tk.k + " in line " + this.c.l);
     }
     this.w.push(tk);
   }
