@@ -2,7 +2,7 @@ import { Tag } from "../tag";
 import { Block } from "./block";
 import { Feat } from "./feat";
 
-export class Proc extends Feat {
+export class Procedure extends Feat {
   constructor(c) {
     super(c);
   }

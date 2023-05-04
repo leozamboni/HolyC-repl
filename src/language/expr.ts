@@ -1,5 +1,5 @@
 import { Tag } from "../tag";
-import { Block } from "./block";
+import { Call } from "./call";
 import { Feat } from "./feat";
 
 export class Expr extends Feat {
@@ -13,9 +13,12 @@ export class Expr extends Feat {
       if (this.c.checkAhead(";")) {
         this.edge(";");
         break;
+      } else if (this.c.checkAhead("(")) {
+        this.w.push(...new Call(this.c).parse(this.c.lex()));
+      } else {
+        this.edge(Tag.MATH);
+        tk = this.c.lex();
       }
-      this.edge(Tag.MATH);
-      tk = this.c.lex();
     }
     return this.w;
   }

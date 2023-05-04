@@ -16,4 +16,5 @@ export enum Tag {
   STR,
   COMMENT,
   MATH,
+  RET,
 }

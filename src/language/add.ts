@@ -13,6 +13,6 @@ export class Add extends Feat {
     throw new Error("Method not implemented.");
   }
   eval() {
-    throw new Error("Method not implemented.");
+    this.emit("+");
   }
 }
