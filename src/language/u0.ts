@@ -18,12 +18,16 @@ export class U0 extends Feat {
       this.w.push(...new Procedure(this.c).parse(this.c.lex()));
     } else {
       this.edge("=");
-      this.edge(Tag.NUM);
-      this.edge(";");
+      this.edge([Tag.NUM, Tag.ID]);
+      if (this.c.k === "(") {
+        this.w.push(...new Procedure(this.c).parse(this.c.lex()));
+      } else {
+        this.edge(";");
+      }
     }
   }
   eval() {
-    if (this.w[2].k === "{") {
+    if (this.w[2].k === "(") {
       return new Procedure(this).eval();
     } else {
       return this.emit("let " + this.w[1].k + " = " + this.w[3].k + ";\n");
