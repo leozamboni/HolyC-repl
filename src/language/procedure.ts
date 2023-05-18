@@ -1,4 +1,5 @@
 import { Tag } from "../tag";
+import { Type } from "../type";
 import { Block } from "./block";
 import { Feat } from "./feat";
 
@@ -27,11 +28,27 @@ export class Procedure extends Feat {
         }
       }
     }
-    return new Block(this.c).parse();
+    this.w.push(...new Block(this.c).parse());
+    return this.w;
   }
   eval() {
-    return (
-      "function " + this.w[1].k + "() {\n" + new Block(this).eval() + "}\n"
+    let params = "";
+    if (this.w[2].k === "(") {
+      for (let i = 3; ; i++) {
+        if (this.w[i].k === ")") break;
+        if ((this.w[i] as Type)?.t !== Tag.DTYPE) {
+          params += this.w[i].k;
+        }
+      }
+    }
+    return this.emit(
+      "function " +
+        this.w[1].k +
+        "(" +
+        params +
+        ") {\n" +
+        new Block(this).eval() +
+        "}\n"
     );
   }
 }

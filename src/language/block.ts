@@ -32,7 +32,7 @@ export class Block extends Feat {
     return this.w;
   }
   eval() {
-    let i = 3;
+    let i = this.w.findIndex((w) => w.k === "{");
     let code = "";
     while (this.w[i].k !== "}") {
       let f = this.c.cases[this.w[i].k];
