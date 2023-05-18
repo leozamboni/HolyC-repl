@@ -29,10 +29,14 @@ export abstract class Feat {
     }
     if (Array.isArray(T)) {
       if (!T.includes(val))
-        throw new Error("unexpected token " + tk.k + " in line " + this.c.l);
+        throw new Error(
+          "unexpected token " + tk.k + " in line " + this.c.l + " type " + tk?.t
+        );
     } else {
       if (val !== T)
-        throw new Error("unexpected token " + tk.k + " in line " + this.c.l);
+        throw new Error(
+          "unexpected token " + tk.k + " in line " + this.c.l + " type " + tk?.t
+        );
     }
     this.w.push(tk);
   }
@@ -44,10 +48,14 @@ export abstract class Feat {
     }
     if (Array.isArray(T)) {
       if (!T.includes(val))
-        throw new Error("unexpected token " + tk.k + " in line " + this.c.l);
+        throw new Error(
+          "unexpected token " + tk.k + " in line " + this.c.l + " type " + tk?.t
+        );
     } else {
       if (val !== T)
-        throw new Error("unexpected token " + tk.k + " in line " + this.c.l);
+        throw new Error(
+          "unexpected token " + tk.k + " in line " + this.c.l + " type " + tk?.t
+        );
     }
     this.w.push(tk);
   }
