@@ -23,6 +23,6 @@ export class Comment extends Feat {
     this.root(tk, Tag.COMMENT);
   }
   eval() {
-    return this.emit("// " + this.w[0].k);
+    return this.emit(this.w[0].k);
   }
 }
