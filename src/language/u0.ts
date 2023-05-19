@@ -1,7 +1,9 @@
 import { Tag } from "../tag";
 import { Type } from "../type";
+import { Call } from "./call";
 import { Feat } from "./feat";
 import { Procedure } from "./procedure";
+import { Expr } from "./expr";
 
 export class U0 extends Feat {
   constructor(c) {
@@ -18,19 +20,17 @@ export class U0 extends Feat {
       this.w.push(...new Procedure(this.c).parse(this.c.lex()));
     } else {
       this.edge("=");
-      this.edge([Tag.NUM, Tag.ID]);
-      if (this.c.k === "(") {
-        this.w.push(...new Procedure(this.c).parse(this.c.lex()));
-      } else {
-        this.edge(";");
-      }
+      this.w.push(...new Expr(this.c).parse(this.c.lex()));
+      this.edge(";");
     }
   }
   eval() {
     if (this.w[2].k === "(") {
       return new Procedure(this).eval();
     } else {
-      return this.emit("let " + this.w[1].k + " = " + this.w[3].k + ";\n");
+      return this.emit(
+        "let " + this.w[1].k + " = " + new Expr(this).eval() + ";\n"
+      );
     }
   }
 }

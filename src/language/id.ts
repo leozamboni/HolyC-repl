@@ -22,6 +22,7 @@ export class Id extends Feat {
     } else {
       this.edge("=");
       this.w.push(...new Expr(this.c).parse(this.c.lex()));
+      this.edge(";");
     }
   }
   eval() {

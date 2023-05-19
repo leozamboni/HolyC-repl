@@ -7,8 +7,8 @@ export class Block extends Feat {
   constructor(c) {
     super(c);
   }
-  parse() {
-    this.root(this.c.lex(), "{");
+  parse(tk) {
+    this.root(tk, "{");
     let t = this.c.lex();
     while (t.k !== "}") {
       let f = this.c.cases[t.k];
@@ -36,18 +36,29 @@ export class Block extends Feat {
     let code = "";
     while (this.w[i].k !== "}") {
       let f = this.c.cases[this.w[i].k];
+      const w = this.w.slice(
+        i,
+        i + this.w.slice(i, this.w.length).findIndex((e) => e?.k === ";")
+      );
       if (f) {
-        f = new f({ ...this, w: this.w.slice(i, this.w.length) });
+        f = new f({ ...this, w });
         code += f.eval();
+        i = i + w.length;
       } else if ((this.w[i] as Word)?.t === Tag.STR) {
         let f = this.c.cases['"'];
+
         if (f) {
-          f = new f({ ...this, w: this.w.slice(i, this.w.length) });
+          f = new f({
+            ...this,
+            w,
+          });
           code += f.eval();
+          i = i + w.length;
         }
       } else if ((this.w[i] as Word)?.t === Tag.ID) {
-        f = new Id({ ...this, w: this.w.slice(i, this.w.length) });
+        f = new Id({ ...this, w });
         code += f.eval();
+        i = i + w.length;
       }
       i++;
     }

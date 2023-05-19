@@ -1,6 +1,4 @@
 import { Tag } from "../tag";
-import { Word } from "../word";
-import { Expr } from "./expr";
 import { Feat } from "./feat";
 
 export class Call extends Feat {

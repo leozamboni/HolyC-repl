@@ -17,6 +17,7 @@ export class Ret extends Feat {
       this.edge(";");
     } else {
       this.w.push(...new Expr(this.c).parse(this.c.lex()));
+      this.edge(";");
     }
   }
   eval() {

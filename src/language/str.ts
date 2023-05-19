@@ -21,6 +21,22 @@ export class Str extends Feat {
     this.edge(";");
   }
   eval() {
-    return this.emit("process.stdout.write(" + this.w[0].k + ");\n");
+    console.log(this.w);
+
+    let str = "";
+    if (this.w[1]?.k) {
+      let i = 1;
+      // eslint-disable-next-line no-constant-condition
+      while (true) {
+        const tk = this.w[i] as any;
+        if (!tk) break;
+        if (tk?.k === ";") break;
+        if (tk?.k !== ",") {
+          str += "+" + this.w[i].k;
+        }
+        i++;
+      }
+    }
+    return this.emit("process.stdout.write(" + this.w[0].k + str + ");\n");
   }
 }

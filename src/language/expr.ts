@@ -7,22 +7,38 @@ export class Expr extends Feat {
     super(c);
   }
   parse(tk) {
+    this.root(tk, [Tag.ID, Tag.NUM]);
     // eslint-disable-next-line no-constant-condition
     while (true) {
-      this.root(tk, [Tag.ID, Tag.NUM]);
       if (this.c.checkAhead(";")) {
-        this.edge(";");
         break;
       } else if (this.c.checkAhead("(")) {
         this.w.push(...new Call(this.c).parse(this.c.lex()));
       } else {
         this.edge(Tag.MATH);
-        tk = this.c.lex();
+        this.edge([Tag.ID, Tag.NUM]);
       }
     }
+
     return this.w;
   }
   eval() {
-    throw new Error("Method not implemented.");
+    let i = this.w.findIndex((w) => w.k === "=") + 1;
+    let str = "";
+    // eslint-disable-next-line no-constant-condition
+    while (true) {
+      const tk = this.w[i] as any;
+      if (tk.k === ";") break;
+      if (
+        tk.k === "," &&
+        (this.w[i - 1] as any)?.t !== Tag.ID &&
+        (this.w[i - 1] as any)?.t !== Tag.NUM
+      ) {
+        str += "_";
+      }
+      str += tk.k;
+      i++;
+    }
+    return this.emit(str);
   }
 }

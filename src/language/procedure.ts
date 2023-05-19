@@ -28,7 +28,7 @@ export class Procedure extends Feat {
         }
       }
     }
-    this.w.push(...new Block(this.c).parse());
+    this.w.push(...new Block(this.c).parse(this.c.lex()));
     return this.w;
   }
   eval() {
