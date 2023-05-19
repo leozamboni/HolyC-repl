@@ -1,8 +1,8 @@
 import { Tag } from "../tag";
+import { Ast } from "./ast";
 import { Call } from "./call";
-import { Feat } from "./feat";
 
-export class Expr extends Feat {
+export class Expr extends Ast {
   constructor(c) {
     super(c);
   }
@@ -23,22 +23,29 @@ export class Expr extends Feat {
     return this.w;
   }
   eval() {
+    let str = " =";
     let i = this.w.findIndex((w) => w.k === "=") + 1;
-    let str = "";
     // eslint-disable-next-line no-constant-condition
     while (true) {
       const tk = this.w[i] as any;
-      if (tk.k === ";") break;
-      if (
-        tk.k === "," &&
-        (this.w[i - 1] as any)?.t !== Tag.ID &&
-        (this.w[i - 1] as any)?.t !== Tag.NUM
-      ) {
-        str += "_";
+      if (tk.k === ";") {
+        str += tk.k;
+        break;
+      } else {
+        str += " " + tk.k;
       }
-      str += tk.k;
+      if (tk.k === "(") {
+        const endCallI = this.w
+          .slice(i, this.w.length)
+          .findIndex((e) => e?.k === ")");
+        const w = this.w.slice(i - 1, i + 1 + endCallI);
+        str = new Call({ ...this, w }).eval();
+        str += ")";
+        i = i + endCallI;
+      }
       i++;
     }
+
     return this.emit(str);
   }
 }

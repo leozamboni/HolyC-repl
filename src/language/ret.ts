@@ -1,9 +1,9 @@
 import { Tag } from "../tag";
 import { Word } from "../word";
+import { Ast } from "./ast";
 import { Expr } from "./expr";
-import { Feat } from "./feat";
 
-export class Ret extends Feat {
+export class Ret extends Ast {
   constructor(c) {
     super(c);
   }
@@ -21,6 +21,11 @@ export class Ret extends Feat {
     }
   }
   eval() {
-    this.emit(this.w.filter((e) => e?.k !== "}").join(" "));
+    return this.emit(
+      this.w
+        .filter((e) => e?.k !== "}" && e?.k !== ";")
+        .map((e) => e?.k)
+        .join(" ") + ";\n"
+    );
   }
 }

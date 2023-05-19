@@ -1,7 +1,7 @@
 import { Tag } from "../tag";
-import { Feat } from "./feat";
+import { Ast } from "./ast";
 
-export class Call extends Feat {
+export class Call extends Ast {
   constructor(c) {
     super(c);
   }
@@ -29,6 +29,23 @@ export class Call extends Feat {
     return this.w;
   }
   eval() {
-    throw new Error("Method not implemented.");
+    let i = 0;
+    let str = "";
+    // eslint-disable-next-line no-constant-condition
+    while (true) {
+      const tk = this.w[i] as any;
+      if (tk.k === ")") break;
+      if (
+        tk.k === "," &&
+        (this.w[i - 1] as any)?.t !== Tag.ID &&
+        (this.w[i - 1] as any)?.t !== Tag.NUM
+      ) {
+        str += "_";
+      }
+      str += tk.k;
+      i++;
+    }
+
+    return this.emit(str);
   }
 }

@@ -1,8 +1,8 @@
 import { Tag } from "../tag";
+import { Ast } from "./ast";
 import { Expr } from "./expr";
-import { Feat } from "./feat";
 
-export class Id extends Feat {
+export class Id extends Ast {
   constructor(c) {
     super(c);
   }
@@ -26,6 +26,9 @@ export class Id extends Feat {
     }
   }
   eval() {
-    return this.emit(this.w[0].k + "();\n");
+    if (this.w[1].k === ";") {
+      return this.emit(this.w[0].k + "();\n");
+    }
+    return this.emit(this.w[0].k + new Expr(this).eval() + "\n");
   }
 }

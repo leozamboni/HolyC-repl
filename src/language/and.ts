@@ -1,9 +1,9 @@
 import { Tag } from "../tag";
 import { Token } from "../token";
 import { Word } from "../word";
-import { Feat } from "./feat";
+import { Ast } from "./ast";
 
-export class And extends Feat {
+export class And extends Ast {
   constructor(c) {
     super(c);
   }

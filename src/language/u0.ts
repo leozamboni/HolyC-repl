@@ -1,11 +1,10 @@
 import { Tag } from "../tag";
 import { Type } from "../type";
-import { Call } from "./call";
-import { Feat } from "./feat";
 import { Procedure } from "./procedure";
 import { Expr } from "./expr";
+import { Ast } from "./ast";
 
-export class U0 extends Feat {
+export class U0 extends Ast {
   constructor(c) {
     super(c);
   }
@@ -28,9 +27,7 @@ export class U0 extends Feat {
     if (this.w[2].k === "(") {
       return new Procedure(this).eval();
     } else {
-      return this.emit(
-        "let " + this.w[1].k + " = " + new Expr(this).eval() + ";\n"
-      );
+      return this.emit("let " + this.w[1].k + new Expr(this).eval() + "\n");
     }
   }
 }

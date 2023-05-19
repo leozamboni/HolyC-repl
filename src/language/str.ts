@@ -1,8 +1,8 @@
 import { Tag } from "../tag";
 import { Word } from "../word";
-import { Feat } from "./feat";
+import { Ast } from "./ast";
 
-export class Str extends Feat {
+export class Str extends Ast {
   constructor(c) {
     super(c);
   }
@@ -21,8 +21,6 @@ export class Str extends Feat {
     this.edge(";");
   }
   eval() {
-    console.log(this.w);
-
     let str = "";
     if (this.w[1]?.k) {
       let i = 1;

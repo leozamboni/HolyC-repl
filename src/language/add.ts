@@ -1,7 +1,7 @@
 import { Math } from "../math";
-import { Feat } from "./feat";
+import { Ast } from "./ast";
 
-export class Add extends Feat {
+export class Add extends Ast {
   constructor(c) {
     super(c);
   }

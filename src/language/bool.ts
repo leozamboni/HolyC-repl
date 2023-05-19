@@ -1,8 +1,8 @@
 import { Tag } from "../tag";
 import { Type } from "../type";
-import { Feat } from "./feat";
+import { Ast } from "./ast";
 
-export class Bool extends Feat {
+export class Bool extends Ast {
   constructor(c) {
     super(c);
   }

@@ -1,9 +1,9 @@
 import { Tag } from "../tag";
 import { Word } from "../word";
-import { Feat } from "./feat";
+import { Ast } from "./ast";
 import { Id } from "./id";
 
-export class Block extends Feat {
+export class Block extends Ast {
   constructor(c) {
     super(c);
   }
@@ -38,12 +38,12 @@ export class Block extends Feat {
       let f = this.c.cases[this.w[i].k];
       const w = this.w.slice(
         i,
-        i + this.w.slice(i, this.w.length).findIndex((e) => e?.k === ";")
+        i + 1 + this.w.slice(i, this.w.length).findIndex((e) => e?.k === ";")
       );
       if (f) {
         f = new f({ ...this, w });
         code += f.eval();
-        i = i + w.length;
+        i = i + w.length - 1;
       } else if ((this.w[i] as Word)?.t === Tag.STR) {
         let f = this.c.cases['"'];
 
@@ -53,15 +53,15 @@ export class Block extends Feat {
             w,
           });
           code += f.eval();
-          i = i + w.length;
+          i = i + w.length - 1;
         }
       } else if ((this.w[i] as Word)?.t === Tag.ID) {
         f = new Id({ ...this, w });
         code += f.eval();
-        i = i + w.length;
+        i = i + w.length - 1;
       }
       i++;
     }
-    return code;
+    return this.emit(code);
   }
 }

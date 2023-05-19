@@ -1,4 +1,4 @@
-import { Feat } from "./language/feat";
+import { Feat } from "./language/ast";
 import { Parser } from "./parser";
 
 export class Eval extends Parser {
