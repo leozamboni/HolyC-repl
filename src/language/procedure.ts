@@ -1,7 +1,7 @@
 import { Tag } from "../tag";
 import { Type } from "../type";
-import { Block } from "./block";
 import { Ast } from "./ast";
+import { Block } from "./block";
 
 export class Procedure extends Ast {
   constructor(c) {

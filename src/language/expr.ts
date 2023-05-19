@@ -23,29 +23,25 @@ export class Expr extends Ast {
     return this.w;
   }
   eval() {
-    let str = " =";
+    let str = "=";
     let i = this.w.findIndex((w) => w.k === "=") + 1;
     // eslint-disable-next-line no-constant-condition
     while (true) {
       const tk = this.w[i] as any;
-      if (tk.k === ";") {
-        str += tk.k;
-        break;
-      } else {
-        str += " " + tk.k;
-      }
+      if (tk.k === ";") break;
       if (tk.k === "(") {
         const endCallI = this.w
           .slice(i, this.w.length)
           .findIndex((e) => e?.k === ")");
-        const w = this.w.slice(i - 1, i + 1 + endCallI);
-        str = new Call({ ...this, w }).eval();
+        const w = this.w.slice(i, i + 1 + endCallI);
+        str += new Call({ ...this, w }).eval();
         str += ")";
         i = i + endCallI;
+      } else {
+        str += tk.k;
       }
       i++;
     }
-
     return this.emit(str);
   }
 }

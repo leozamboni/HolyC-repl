@@ -1,5 +1,6 @@
 import { Tag } from "../tag";
 import { Ast } from "./ast";
+import { Call } from "./call";
 import { Expr } from "./expr";
 
 export class Id extends Ast {
@@ -28,6 +29,8 @@ export class Id extends Ast {
   eval() {
     if (this.w[1].k === ";") {
       return this.emit(this.w[0].k + "();\n");
+    } else if (this.w[1].k === "(") {
+      return this.emit(new Call(this).eval() + ");\n");
     }
     return this.emit(this.w[0].k + new Expr(this).eval() + "\n");
   }

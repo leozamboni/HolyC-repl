@@ -40,12 +40,11 @@ export class Call extends Ast {
         (this.w[i - 1] as any)?.t !== Tag.ID &&
         (this.w[i - 1] as any)?.t !== Tag.NUM
       ) {
-        str += "_";
+        str += "undefined";
       }
       str += tk.k;
       i++;
     }
-
     return this.emit(str);
   }
 }
