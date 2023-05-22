@@ -1,14 +1,8 @@
 export enum Tag {
   AND = 256,
-  OR,
-  EQ,
-  NE,
-  LE,
-  GE,
+  LOGICAL,
   TRUE,
   FALSE,
-  GR,
-  LS,
   NUM,
   FLOAT,
   ID,
@@ -17,4 +11,5 @@ export enum Tag {
   COMMENT,
   MATH,
   RET,
+  IF,
 }

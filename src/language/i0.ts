@@ -1,7 +1,7 @@
 import { Tag } from "../tag";
 import { Type } from "../type";
 import { Ast } from "./ast";
-import { Procedure } from "./procedure";
+import { Proc } from "./proc";
 import { U0 } from "./u0";
 
 export class I0 extends U0 {

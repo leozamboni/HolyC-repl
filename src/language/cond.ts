@@ -2,7 +2,7 @@ import { Tag } from "../tag";
 import { Ast } from "./ast";
 import { Call } from "./call";
 
-export class Expr extends Ast {
+export class Cond extends Ast {
   constructor(c) {
     super(c);
   }
@@ -10,7 +10,7 @@ export class Expr extends Ast {
     this.root(tk, [Tag.ID, Tag.NUM, Tag.TRUE, Tag.FALSE]);
     // eslint-disable-next-line no-constant-condition
     while (true) {
-      if (this.c.checkAhead(";")) {
+      if (this.c.checkAhead(")")) {
         break;
       } else if (this.c.checkAhead("(")) {
         this.w.push(...new Call(this.c).parse(this.c.lex()));
@@ -19,12 +19,11 @@ export class Expr extends Ast {
         this.edge([Tag.ID, Tag.NUM, Tag.TRUE, Tag.FALSE]);
       }
     }
-
     return this.w;
   }
   eval() {
-    let str = "=";
-    let i = this.w.findIndex((w) => w.k === "=") + 1;
+    let str = "(";
+    let i = this.w.findIndex((w) => w.k === "(") + 1;
     // eslint-disable-next-line no-constant-condition
     while (true) {
       const tk = this.w[i] as any;

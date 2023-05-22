@@ -3,7 +3,7 @@ import { Type } from "../type";
 import { Ast } from "./ast";
 import { Block } from "./block";
 
-export class Procedure extends Ast {
+export class Proc extends Ast {
   constructor(c) {
     super(c);
   }

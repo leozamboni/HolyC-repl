@@ -1,6 +1,5 @@
-import { Tag } from "../tag";
+import { Logical } from "../logical";
 import { Token } from "../token";
-import { Word } from "../word";
 import { Ast } from "./ast";
 
 export class Ne extends Ast {
@@ -9,7 +8,7 @@ export class Ne extends Ast {
   }
   static k = "!";
   lex() {
-    if (this.c.checkAhead("=")) return new Word("!=", Tag.NE);
+    if (this.c.checkAhead("=")) return Logical.ne;
     else return new Token("!");
   }
   parse() {

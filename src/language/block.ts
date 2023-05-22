@@ -42,7 +42,7 @@ export class Block extends Ast {
       );
       if (f) {
         f = new f({ ...this, w });
-        code += f.eval();
+        code += "\t" + f.eval();
         i = i + w.length - 1;
       } else if ((this.w[i] as Word)?.t === Tag.STR) {
         let f = this.c.cases['"'];
@@ -52,12 +52,12 @@ export class Block extends Ast {
             ...this,
             w,
           });
-          code += f.eval();
+          code += "\t" + f.eval();
           i = i + w.length - 1;
         }
       } else if ((this.w[i] as Word)?.t === Tag.ID) {
         f = new Id({ ...this, w });
-        code += f.eval();
+        code += "\t" + f.eval();
         i = i + w.length - 1;
       }
       i++;

@@ -28,6 +28,6 @@ export class Bool extends Ast {
         value = "true";
         break;
     }
-    return this.emit("let " + id + " = " + value + ";\n");
+    return this.emit("let " + id + "=" + value + ";\n");
   }
 }

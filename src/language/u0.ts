@@ -1,6 +1,6 @@
 import { Tag } from "../tag";
 import { Type } from "../type";
-import { Procedure } from "./procedure";
+import { Proc } from "./proc";
 import { Expr } from "./expr";
 import { Ast } from "./ast";
 
@@ -16,7 +16,7 @@ export class U0 extends Ast {
     this.root(tk, Tag.DTYPE);
     this.edge(Tag.ID);
     if (this.c.k === "(") {
-      this.w.push(...new Procedure(this.c).parse(this.c.lex()));
+      this.w.push(...new Proc(this.c).parse(this.c.lex()));
     } else {
       this.edge("=");
       this.w.push(...new Expr(this.c).parse(this.c.lex()));
@@ -25,9 +25,9 @@ export class U0 extends Ast {
   }
   eval() {
     if (this.w[2].k === "(") {
-      return new Procedure(this).eval();
+      return new Proc(this).eval();
     } else {
-      return this.emit("let " + this.w[1].k + new Expr(this).eval() + "\n");
+      return this.emit("let " + this.w[1].k + new Expr(this).eval() + ";\n");
     }
   }
 }

@@ -1,6 +1,5 @@
-import { Tag } from "../tag";
+import { Logical } from "../logical";
 import { Token } from "../token";
-import { Word } from "../word";
 import { Ast } from "./ast";
 
 export class Or extends Ast {
@@ -9,7 +8,7 @@ export class Or extends Ast {
   }
   static k = "|";
   lex() {
-    if (this.c.checkAhead("|")) return new Word("||", Tag.OR);
+    if (this.c.checkAhead("|")) return Logical.or;
     else return new Token("|");
   }
   parse() {

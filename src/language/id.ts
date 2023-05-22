@@ -32,6 +32,6 @@ export class Id extends Ast {
     } else if (this.w[1].k === "(") {
       return this.emit(new Call(this).eval() + ");\n");
     }
-    return this.emit(this.w[0].k + new Expr(this).eval() + "\n");
+    return this.emit(this.w[0].k + new Expr(this).eval() + ";\n");
   }
 }

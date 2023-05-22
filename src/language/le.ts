@@ -1,6 +1,5 @@
-import { Tag } from "../tag";
+import { Logical } from "../logical";
 import { Token } from "../token";
-import { Word } from "../word";
 import { Ast } from "./ast";
 
 export class Le extends Ast {
@@ -9,8 +8,8 @@ export class Le extends Ast {
   }
   static k = "<";
   lex() {
-    if (this.c.checkAhead("=")) return new Word("<=", Tag.LE);
-    else return new Token("<");
+    if (this.c.checkAhead("=")) return Logical.le;
+    else return Logical.l;
   }
   parse() {
     throw new Error("Method not implemented.");
