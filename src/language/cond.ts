@@ -1,8 +1,8 @@
 import { Tag } from "../tag";
-import { Statm } from "./statm";
 import { Call } from "./call";
+import { Stmt } from "./stmt";
 
-export class Cond extends Statm {
+export class Cond extends Stmt {
   constructor(c) {
     super(c);
   }
@@ -10,9 +10,9 @@ export class Cond extends Statm {
     this.root(tk, [Tag.ID, Tag.NUM, Tag.TRUE, Tag.FALSE]);
     // eslint-disable-next-line no-constant-condition
     while (true) {
-      if (this.c.checkAhead(")")) {
+      if (this.c.charAHead(")")) {
         break;
-      } else if (this.c.checkAhead("(")) {
+      } else if (this.c.charAHead("(")) {
         this.w.push(...new Call(this.c).parse(this.c.lex()));
       } else {
         this.edge([Tag.MATH, Tag.LOGICAL]);

@@ -1,8 +1,8 @@
 import { Tag } from "../tag";
 import { Word } from "../word";
-import { Statm } from "./statm";
+import { Stmt } from "./stmt";
 
-export class Str extends Statm {
+export class Str extends Stmt {
   constructor(c) {
     super(c);
   }
@@ -12,11 +12,11 @@ export class Str extends Statm {
   }
   parse(tk) {
     this.root(tk, Tag.STR);
-    if (this.c.checkAhead(",")) {
+    if (this.c.charAHead(",")) {
       do {
         this.edge(",");
         this.edge([Tag.STR, Tag.ID]);
-      } while (this.c.checkAhead(","));
+      } while (this.c.charAHead(","));
     }
     this.edge(";");
   }

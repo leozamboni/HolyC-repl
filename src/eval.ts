@@ -1,11 +1,11 @@
-import { Feat } from "./language/statm";
+import { Stmt } from "./language/stmt";
 import { Parser } from "./parser";
 
 export class Eval extends Parser {
   constructor() {
     super();
   }
-  eval(t: Feat) {
+  eval(t: Stmt) {
     if (t?.eval) return t.eval();
   }
 }

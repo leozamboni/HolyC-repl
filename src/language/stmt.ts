@@ -3,13 +3,13 @@ import { TokenType } from "../interface";
 import { Tag } from "../tag";
 import { Word } from "../word";
 
-export interface Feat {
+export interface Stmt {
   lex?(): TokenType | void;
   parse?(t: TokenType): void;
   eval?(): string | void;
 }
 
-export abstract class Statm {
+export abstract class Stmt {
   c: Compiler;
   w: TokenType[];
   constructor(arg) {

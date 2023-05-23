@@ -12,4 +12,5 @@ export enum Tag {
   MATH,
   RET,
   IF,
+  ELSE,
 }

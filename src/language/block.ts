@@ -1,9 +1,9 @@
 import { Tag } from "../tag";
 import { Word } from "../word";
-import { Statm } from "./statm";
 import { Id } from "./id";
+import { Stmt } from "./stmt";
 
-export class Block extends Statm {
+export class Block extends Stmt {
   constructor(c) {
     super(c);
   }
@@ -22,6 +22,7 @@ export class Block extends Statm {
           f.parse(t);
         }
       } else {
+        console.log(this.w);
         f = new Id(this);
         f.parse(t);
       }

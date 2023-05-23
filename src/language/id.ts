@@ -1,19 +1,19 @@
 import { Tag } from "../tag";
-import { Statm } from "./statm";
 import { Call } from "./call";
 import { Expr } from "./expr";
+import { Stmt } from "./stmt";
 
-export class Id extends Statm {
+export class Id extends Stmt {
   constructor(c) {
     super(c);
   }
   parse(tk) {
     this.root(tk, Tag.ID);
-    if (this.c.checkAhead(";")) {
+    if (this.c.charAHead(";")) {
       this.edge(";");
-    } else if (this.c.checkAhead("(")) {
+    } else if (this.c.charAHead("(")) {
       this.edge("(");
-      if (this.c.checkAhead(")")) {
+      if (this.c.charAHead(")")) {
         this.edge(")");
       } else {
         this.edge(Tag.STR);

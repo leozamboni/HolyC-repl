@@ -1,15 +1,17 @@
 import { Logical } from "../logical";
 import { Token } from "../token";
-import { Statm } from "./statm";
+import { Stmt } from "./stmt";
 
-export class Or extends Statm {
+export class Or extends Stmt {
   constructor(c) {
     super(c);
   }
   static k = "|";
   lex() {
-    if (this.c.checkAhead("|")) return Logical.or;
-    else return new Token("|");
+    if (this.c.charAHead("|")) {
+      this.c.i++; // FIX
+      return Logical.or;
+    } else return new Token("|");
   }
   parse() {
     throw new Error("Method not implemented.");

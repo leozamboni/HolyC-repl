@@ -1,24 +1,32 @@
 import { Files } from "./files.js";
-import { Feat } from "./language/statm.js";
+import { Stmt } from "./language/stmt.js";
 import { Num } from "./num.js";
 import { Float } from "./real.js";
 import { Tag } from "./tag.js";
 import { Token } from "./token.js";
 import { Word } from "./word.js";
-
 export class Scanner {
   i = 0;
   l = 1;
   t = 0;
   k = "";
   ignore = [" ", "\t", "\n"];
+  cases!: () => Stmt[];
+  constructor(cases: () => Stmt[]) {
+    this.cases = cases;
+  }
   read() {
     this.k = Files.stdin[this.i++];
   }
-  checkAhead(c) {
+  charAHead(c) {
     return Files.stdin[this.i] === c;
   }
-  scan(cases: () => Feat[]) {
+  tokenAhead(w) {
+    const tk = this.scan();
+    this.i -= tk.k.length;
+    return tk.k === w;
+  }
+  scan() {
     this.read();
     while (this.ignore.includes(this.k)) {
       if (this.k === "\n") this.l++;
@@ -32,11 +40,11 @@ export class Scanner {
         this.read();
       } while (this.k && !(this.k === '"' || this.k === "'"));
       this.k = b + '"';
-      const f = cases['"'];
+      const f = this.cases['"'];
       if (f) return new f(this).lex();
       return new Word(this.k, Tag.STR);
     }
-    const f = cases[this.k];
+    const f = this.cases[this.k];
     if (f) return new f(this).lex();
     if (/^\d$/.test(this.k)) {
       let v = 0;
@@ -64,7 +72,7 @@ export class Scanner {
       } while (this.k && /[a-zA-Z0-9_]/i.test(this.k));
       this.i--;
       const s = b;
-      const f = cases[s];
+      const f = this.cases[s];
       if (f) return new f(this).lex();
       return new Word(s, Tag.ID);
     }

@@ -1,8 +1,8 @@
 import { Tag } from "../tag";
 import { Type } from "../type";
-import { Statm } from "./statm";
+import { Stmt } from "./stmt";
 
-export class Bool extends Statm {
+export class Bool extends Stmt {
   constructor(c) {
     super(c);
   }

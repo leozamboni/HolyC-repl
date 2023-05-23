@@ -1,9 +1,9 @@
 import { Tag } from "../tag";
 import { Word } from "../word";
-import { Statm } from "./statm";
 import { Expr } from "./expr";
+import { Stmt } from "./stmt";
 
-export class Ret extends Statm {
+export class Ret extends Stmt {
   constructor(c) {
     super(c);
   }
@@ -13,7 +13,7 @@ export class Ret extends Statm {
   }
   parse(tk) {
     this.root(tk, Tag.RET);
-    if (this.c.checkAhead(";")) {
+    if (this.c.charAHead(";")) {
       this.edge(";");
     } else {
       this.w.push(...new Expr(this.c).parse(this.c.lex()));

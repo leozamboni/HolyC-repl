@@ -1,26 +1,26 @@
 import { Tag } from "../tag";
 import { Type } from "../type";
-import { Statm } from "./statm";
 import { Block } from "./block";
+import { Stmt } from "./stmt";
 
-export class Proc extends Statm {
+export class Proc extends Stmt {
   constructor(c) {
     super(c);
   }
   parse(tk) {
     this.root(tk, "(");
-    if (this.c.checkAhead(")")) {
+    if (this.c.charAHead(")")) {
       this.edge(")");
     } else {
       // eslint-disable-next-line no-constant-condition
       while (true) {
         this.edge(Tag.DTYPE);
         this.edge(Tag.ID);
-        if (this.c.checkAhead("=")) {
+        if (this.c.charAHead("=")) {
           this.edge("=");
           this.edge(Tag.NUM);
         }
-        if (this.c.checkAhead(",")) {
+        if (this.c.charAHead(",")) {
           this.edge(",");
         } else {
           this.edge(")");

@@ -1,14 +1,13 @@
 import { Logical } from "../logical";
-import { Token } from "../token";
-import { Statm } from "./statm";
+import { Stmt } from "./stmt";
 
-export class Ge extends Statm {
+export class Ge extends Stmt {
   constructor(c) {
     super(c);
   }
   static k = ">";
   lex() {
-    if (this.c.checkAhead("=")) return Logical.ge;
+    if (this.c.charAHead("=")) return Logical.ge;
     else return Logical.g;
   }
   parse() {

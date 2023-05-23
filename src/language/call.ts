@@ -1,24 +1,24 @@
 import { Tag } from "../tag";
-import { Statm } from "./statm";
+import { Stmt } from "./stmt";
 
-export class Call extends Statm {
+export class Call extends Stmt {
   constructor(c) {
     super(c);
   }
   parse(tk) {
-    if (this.c.checkAhead(";")) {
+    if (this.c.charAHead(";")) {
       this.root(tk, ";");
     } else {
       this.root(tk, "(");
       // eslint-disable-next-line no-constant-condition
       while (true) {
-        if (this.c.checkAhead(")")) {
+        if (this.c.charAHead(")")) {
           this.edge(")");
           break;
         }
-        if (this.c.checkAhead(",")) {
+        if (this.c.charAHead(",")) {
           this.edge(",");
-          if (!this.c.checkAhead(",")) {
+          if (!this.c.charAHead(",")) {
             this.edge([Tag.ID, Tag.NUM]);
           }
         } else {

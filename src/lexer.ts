@@ -1,17 +1,17 @@
 import { Scanner } from "./scanner";
 import * as Language from "./language";
-import { Feat } from "./language/statm";
+import { Stmt } from "./language/stmt";
 
 export class Lexer extends Scanner {
-  cases: () => Feat[];
   constructor() {
-    super();
-    this.cases = Object.keys(Language).reduce(
-      (a, v) => ({ ...a, [Language[v].k]: Language[v] }),
-      {}
-    ) as () => Feat[];
+    super(
+      Object.keys(Language).reduce(
+        (a, v) => ({ ...a, [Language[v].k]: Language[v] }),
+        {}
+      ) as () => Stmt[]
+    );
   }
   lex() {
-    return this.scan(this.cases);
+    return this.scan();
   }
 }

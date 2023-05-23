@@ -1,14 +1,14 @@
 import { Tag } from "../tag";
 import { Word } from "../word";
 import { Math } from "../math";
-import { Statm } from "./statm";
-export class Comment extends Statm {
+import { Stmt } from "./stmt";
+export class Comment extends Stmt {
   constructor(c) {
     super(c);
   }
   static k = "/";
   lex() {
-    if (this.c.checkAhead("/")) {
+    if (this.c.charAHead("/")) {
       let c = "/";
       this.c.read();
       do {

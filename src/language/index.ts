@@ -25,3 +25,4 @@ export * from "./mul";
 export * from "./sub";
 export * from "./ret";
 export * from "./if";
+export * from "./else";
