@@ -1,8 +1,8 @@
 import { Logical } from "../logical";
 import { Token } from "../token";
-import { Ast } from "./ast";
+import { Statm } from "./statm";
 
-export class Ge extends Ast {
+export class Ge extends Statm {
   constructor(c) {
     super(c);
   }

@@ -1,6 +1,6 @@
 import { Tag } from "../tag";
 import { Type } from "../type";
-import { Ast } from "./ast";
+import { Statm } from "./statm";
 import { Proc } from "./proc";
 import { U0 } from "./u0";
 

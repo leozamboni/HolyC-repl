@@ -1,9 +1,9 @@
 import { Tag } from "../tag";
-import { Ast } from "./ast";
+import { Statm } from "./statm";
 import { Call } from "./call";
 import { Expr } from "./expr";
 
-export class Id extends Ast {
+export class Id extends Statm {
   constructor(c) {
     super(c);
   }

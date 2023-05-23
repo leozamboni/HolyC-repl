@@ -1,9 +1,9 @@
 import { Tag } from "../tag";
 import { Type } from "../type";
-import { Ast } from "./ast";
+import { Statm } from "./statm";
 import { Block } from "./block";
 
-export class Proc extends Ast {
+export class Proc extends Statm {
   constructor(c) {
     super(c);
   }

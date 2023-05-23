@@ -1,8 +1,8 @@
 import { Tag } from "../tag";
 import { Word } from "../word";
-import { Ast } from "./ast";
+import { Statm } from "./statm";
 
-export class Str extends Ast {
+export class Str extends Statm {
   constructor(c) {
     super(c);
   }

@@ -1,6 +1,6 @@
 import { Scanner } from "./scanner";
 import * as Language from "./language";
-import { Feat } from "./language/ast";
+import { Feat } from "./language/statm";
 
 export class Lexer extends Scanner {
   cases: () => Feat[];

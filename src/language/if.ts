@@ -1,11 +1,11 @@
 import { Tag } from "../tag";
 import { Word } from "../word";
-import { Ast } from "./ast";
+import { Statm } from "./statm";
 import { Block } from "./block";
 import { Cond } from "./cond";
 import { Expr } from "./expr";
 
-export class If extends Ast {
+export class If extends Statm {
   constructor(c) {
     super(c);
   }

@@ -9,7 +9,7 @@ export interface Feat {
   eval?(): string | void;
 }
 
-export abstract class Ast {
+export abstract class Statm {
   c: Compiler;
   w: TokenType[];
   constructor(arg) {
