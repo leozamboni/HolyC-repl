@@ -8,8 +8,10 @@ export class Eq extends Stmt {
   }
   static k = "=";
   lex() {
-    if (this.c.charAHead("=")) return Logical.eq;
-    else return new Token("=");
+    if (this.c.charAHead("=")) {
+      this.c.i++;
+      return Logical.eq;
+    } else return new Token("=");
   }
   parse() {
     throw new Error("Method not implemented.");

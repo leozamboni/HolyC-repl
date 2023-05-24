@@ -22,7 +22,6 @@ export class Block extends Stmt {
           f.parse(t);
         }
       } else {
-        console.log(this.w);
         f = new Id(this);
         f.parse(t);
       }
@@ -35,19 +34,21 @@ export class Block extends Stmt {
   eval() {
     let i = this.w.findIndex((w) => w.k === "{");
     let code = "";
-    while (this.w[i].k !== "}") {
+    while (this.w[i] && this.w[i].k !== "}") {
       let f = this.c.cases[this.w[i].k];
-      const w = this.w.slice(
-        i,
-        i + 1 + this.w.slice(i, this.w.length).findIndex((e) => e?.k === ";")
-      );
       if (f) {
+        const endI =
+          this.w.slice(i, this.w.length).findIndex((e) => e?.k === "}") + 1;
+        const w = this.w.slice(i, i + endI);
         f = new f({ ...this, w });
         code += "\t" + f.eval();
         i = i + w.length - 1;
       } else if ((this.w[i] as Word)?.t === Tag.STR) {
-        let f = this.c.cases['"'];
+        const endI =
+          this.w.slice(i, this.w.length).findIndex((e) => e?.k === ";") + 1;
+        const w = this.w.slice(i, i + endI);
 
+        let f = this.c.cases['"'];
         if (f) {
           f = new f({
             ...this,
@@ -57,6 +58,10 @@ export class Block extends Stmt {
           i = i + w.length - 1;
         }
       } else if ((this.w[i] as Word)?.t === Tag.ID) {
+        const endI =
+          this.w.slice(i, this.w.length).findIndex((e) => e?.k === ";") + 1;
+        const w = this.w.slice(i, i + endI);
+
         f = new Id({ ...this, w });
         code += "\t" + f.eval();
         i = i + w.length - 1;

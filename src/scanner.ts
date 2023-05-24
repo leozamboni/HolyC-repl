@@ -23,8 +23,10 @@ export class Scanner {
   }
   tokenAhead(w) {
     const tk = this.scan();
-    this.i -= tk.k.length;
-    return tk.k === w;
+    if (tk.k) {
+      this.i -= tk.k.length;
+    }
+    return tk?.k === w;
   }
   scan() {
     this.read();

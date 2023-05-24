@@ -18,18 +18,11 @@ export class If extends Stmt {
     this.w.push(...new Cond(this.c).parse(this.c.lex()));
     this.edge(")");
     this.w.push(...new Block(this.c).parse(this.c.lex()));
-    while (this.c.tokenAhead("else")) {
-      this.edge(Tag.ELSE);
-      if (this.c.tokenAhead("if")) {
-        this.edge(Tag.IF);
-        this.edge("(");
-        this.w.push(...new Cond(this.c).parse(this.c.lex()));
-        this.edge(")");
-      }
-      this.w.push(...new Block(this.c).parse(this.c.lex()));
-    }
+    return this.w;
   }
   eval() {
+    console.log(this.w);
+
     let i = 2;
     let str = "if (";
     // eslint-disable-next-line no-constant-condition
@@ -39,17 +32,11 @@ export class If extends Stmt {
       i++;
     }
     i++;
-    if (this.w[i].k === "else") {
-      while (true) {
-        str += this.w[i].k;
-        if (this.w[i].k === ")") break;
-        i++;
-      }
+    if (this.w[i].k === "{") {
+      str += " {\n" + new Block(this).eval() + " }";
+      const aux = this.w.slice(i, this.w.length).findIndex((e) => e?.k === "}");
+      i += aux + 1;
     }
-
-    console.log(str);
-    str += " {\n" + new Block(this).eval() + " }";
-    console.log(str);
     return this.emit(str);
   }
 }

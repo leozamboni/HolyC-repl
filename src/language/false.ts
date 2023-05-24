@@ -8,7 +8,7 @@ export class False extends Stmt {
   }
   static k = "FALSE";
   lex() {
-    return new Word("FALSE", Tag.FALSE);
+    return new Word("false", Tag.FALSE);
   }
   parse() {
     throw new Error("Method not implemented.");

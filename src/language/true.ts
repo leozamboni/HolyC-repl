@@ -8,7 +8,7 @@ export class True extends Stmt {
   }
   static k = "TRUE";
   lex() {
-    return new Word("TRUE", Tag.TRUE);
+    return new Word("true", Tag.TRUE);
   }
   parse() {
     throw new Error("Method not implemented.");
