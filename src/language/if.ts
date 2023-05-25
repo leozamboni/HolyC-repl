@@ -1,4 +1,5 @@
 import { Tag } from "../tag";
+import { Utils } from "../utils";
 import { Word } from "../word";
 import { Block } from "./block";
 import { Cond } from "./cond";
@@ -21,8 +22,6 @@ export class If extends Stmt {
     return this.w;
   }
   eval() {
-    console.log(this.w);
-
     let i = 2;
     let str = "if (";
     // eslint-disable-next-line no-constant-condition
@@ -33,7 +32,9 @@ export class If extends Stmt {
     }
     i++;
     if (this.w[i].k === "{") {
-      str += " {\n" + new Block(this).eval() + " }";
+      str += " {\n" + new Block(this).eval();
+      str += Utils.block_fix();
+      str += "}\n";
       const aux = this.w.slice(i, this.w.length).findIndex((e) => e?.k === "}");
       i += aux + 1;
     }

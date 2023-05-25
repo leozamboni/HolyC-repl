@@ -11,10 +11,4 @@ export class Ne extends Stmt {
     if (this.c.charAHead("=")) return Logical.ne;
     else return new Token("!");
   }
-  parse() {
-    throw new Error("Method not implemented.");
-  }
-  eval() {
-    throw new Error("Method not implemented.");
-  }
 }

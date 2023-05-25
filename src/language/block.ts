@@ -1,9 +1,11 @@
 import { Tag } from "../tag";
+import { Utils } from "../utils";
 import { Word } from "../word";
 import { Id } from "./id";
 import { Stmt } from "./stmt";
 
 export class Block extends Stmt {
+  static curr_block_level = 0;
   constructor(c) {
     super(c);
   }
@@ -32,6 +34,7 @@ export class Block extends Stmt {
     return this.w;
   }
   eval() {
+    Block.curr_block_level++;
     let i = this.w.findIndex((w) => w.k === "{");
     let code = "";
     while (this.w[i] && this.w[i].k !== "}") {
@@ -41,7 +44,8 @@ export class Block extends Stmt {
           this.w.slice(i, this.w.length).findIndex((e) => e?.k === "}") + 1;
         const w = this.w.slice(i, i + endI);
         f = new f({ ...this, w });
-        code += "\t" + f.eval();
+        code += Utils.block_fix();
+        code += f.eval();
         i = i + w.length - 1;
       } else if ((this.w[i] as Word)?.t === Tag.STR) {
         const endI =
@@ -54,7 +58,8 @@ export class Block extends Stmt {
             ...this,
             w,
           });
-          code += "\t" + f.eval();
+          code += Utils.block_fix();
+          code += f.eval();
           i = i + w.length - 1;
         }
       } else if ((this.w[i] as Word)?.t === Tag.ID) {
@@ -63,11 +68,13 @@ export class Block extends Stmt {
         const w = this.w.slice(i, i + endI);
 
         f = new Id({ ...this, w });
-        code += "\t" + f.eval();
+        code += Utils.block_fix();
+        code += f.eval();
         i = i + w.length - 1;
       }
       i++;
     }
+    Block.curr_block_level--;
     return this.emit(code);
   }
 }

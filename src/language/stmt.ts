@@ -2,6 +2,7 @@ import { Compiler } from "../compiler";
 import { TokenType } from "../interface";
 import { Tag } from "../tag";
 import { Word } from "../word";
+import { Block } from "./block";
 
 export interface Stmt {
   lex?(): TokenType | void;

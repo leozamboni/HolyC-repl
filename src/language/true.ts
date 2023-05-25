@@ -10,10 +10,4 @@ export class True extends Stmt {
   lex() {
     return new Word("true", Tag.TRUE);
   }
-  parse() {
-    throw new Error("Method not implemented.");
-  }
-  eval() {
-    throw new Error("Method not implemented.");
-  }
 }

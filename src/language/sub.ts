@@ -9,10 +9,4 @@ export class Sub extends Stmt {
   lex() {
     return Math.sub;
   }
-  parse() {
-    throw new Error("Method not implemented.");
-  }
-  eval() {
-    this.emit("-");
-  }
 }
