@@ -9,6 +9,11 @@ export class Id extends Stmt {
   }
   parse(tk) {
     this.root(tk, Tag.ID);
+    if (this.c.charAHead(".")) {
+      this.edge(".");
+      this.edge(Tag.ID);
+    }
+
     if (this.c.charAHead(";")) {
       this.edge(";");
     } else if (this.c.charAHead("(")) {
@@ -20,8 +25,11 @@ export class Id extends Stmt {
         this.edge(")");
       }
       this.edge(";");
-    } else {
+    } else if (this.c.tokenAhead("=")) {
       this.edge("=");
+      this.w.push(...new Expr(this.c).parse(this.c.lex()));
+      this.edge(";");
+    } else {
       this.w.push(...new Expr(this.c).parse(this.c.lex()));
       this.edge(";");
     }

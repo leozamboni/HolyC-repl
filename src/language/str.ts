@@ -16,6 +16,10 @@ export class Str extends Stmt {
       do {
         this.edge(",");
         this.edge([Tag.STR, Tag.ID]);
+        if (this.c.charAHead(".")) {
+          this.edge(".");
+          this.edge(Tag.ID);
+        }
       } while (this.c.charAHead(","));
     }
     this.edge(";");

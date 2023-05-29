@@ -8,6 +8,10 @@ export class Expr extends Stmt {
   }
   parse(tk) {
     this.root(tk, [Tag.ID, Tag.NUM, Tag.TRUE, Tag.FALSE]);
+    if (this.c.charAHead(".")) {
+      this.edge(".");
+      this.edge(Tag.ID);
+    }
     // eslint-disable-next-line no-constant-condition
     while (true) {
       if (this.c.charAHead(";")) {
@@ -17,6 +21,10 @@ export class Expr extends Stmt {
       } else {
         this.edge([Tag.MATH, Tag.LOGICAL]);
         this.edge([Tag.ID, Tag.NUM, Tag.TRUE, Tag.FALSE]);
+        if (this.c.charAHead(".")) {
+          this.edge(".");
+          this.edge(Tag.ID);
+        }
       }
     }
 

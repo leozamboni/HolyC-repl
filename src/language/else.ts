@@ -1,9 +1,7 @@
-import { TokenType } from "../interface";
 import { Tag } from "../tag";
 import { Utils } from "../utils";
 import { Word } from "../word";
 import { Block } from "./block";
-import { Cond } from "./cond";
 import { If } from "./if";
 import { Stmt } from "./stmt";
 
@@ -31,7 +29,7 @@ export class Else extends Stmt {
         str += new If({ ...this, w: this.w.slice(1, this.w.length) }).eval();
       } else if (this.w[1].k === "{") {
         let i = 1;
-        str += " {\n" + new Block(this).eval();
+        str += "{\n" + new Block(this).eval();
         str += Utils.block_fix();
         str += "}\n";
         const aux = this.w
