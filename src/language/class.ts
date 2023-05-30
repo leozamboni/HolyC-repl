@@ -1,4 +1,3 @@
-import { Compiler } from "../compiler";
 import { SymtT } from "../symt";
 import { Tag } from "../tag";
 import { Type } from "../type";
@@ -15,7 +14,7 @@ export class Class extends Stmt {
   }
   parse(tk) {
     this.root(tk, Tag.CLASS);
-    Compiler.symt.push(SymtT.CLASS, this.edge(Tag.ID));
+    this.c.symt.push(SymtT.CLASS, this.edge(Tag.ID));
     this.edge("{");
     while (true) {
       this.edge([Tag.DTYPE, Tag.ID]);
@@ -40,7 +39,7 @@ export class Class extends Stmt {
         break;
       }
     }
-    Compiler.symt.push(SymtT.CLASS, this.edge(Tag.ID));
+    this.c.symt.push(SymtT.CLASS, this.edge(Tag.ID));
     this.edge(";");
   }
   eval() {
@@ -55,7 +54,7 @@ export class Class extends Stmt {
       } else if (this.w[i].k === ",") {
         str += "; ";
       } else if ((this.w[i] as Type)?.t !== Tag.DTYPE) {
-        if (!Compiler.symt.check(SymtT.CLASS, this.w[i])) {
+        if (!this.c.symt.check(SymtT.CLASS, this.w[i])) {
           str += this.w[i]?.k;
         }
       }

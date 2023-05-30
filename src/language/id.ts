@@ -37,8 +37,8 @@ export class Id extends Stmt {
     }
   }
   eval() {
-    if (Compiler.symt.check(SymtT.CLASS, this.w[0])) {
-      const cName = Compiler.symt.get(SymtT.CLASS, this.w[0])?.k;
+    if (this.c.symt.check(SymtT.CLASS, this.w[0])) {
+      const cName = this.c.symt.get(SymtT.CLASS, this.w[0])?.k;
       return this.emit(
         "let " +
           this.w

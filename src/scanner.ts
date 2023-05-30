@@ -1,4 +1,4 @@
-import { Files } from "./files.js";
+import { Compiler } from "./compiler.js";
 import { Stmt } from "./language/stmt.js";
 import { Num } from "./num.js";
 import { Float } from "./real.js";
@@ -16,10 +16,10 @@ export class Scanner {
     this.cases = cases;
   }
   read() {
-    this.k = Files.stdin[this.i++];
+    this.k = Compiler.files.stdin[this.i++];
   }
   charAHead(c) {
-    return Files.stdin[this.i] === c;
+    return Compiler.files.stdin[this.i] === c;
   }
   tokenAhead(w) {
     const tk = this.scan();

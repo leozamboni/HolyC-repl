@@ -1,12 +1,16 @@
 import { Compiler } from "./compiler";
-import { Files } from "./files";
+
+const stdin = process.argv[2];
 
 class HolyC {
   compiler: Compiler;
   constructor() {
-    Files.stdin = process.argv[2];
-    this.compiler = new Compiler();
-    this.compiler.run();
+    this.compiler = new Compiler(stdin);
   }
 }
-new HolyC();
+
+const HC = new HolyC();
+HC.compiler.run();
+console.log(Compiler.files.stdout);
+console.log(Compiler.files.stderr);
+HC.compiler.interpret();

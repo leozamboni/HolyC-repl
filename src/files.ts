@@ -1,5 +1,10 @@
 export class Files {
-  static stdin;
-  static stdout;
-  static stderr;
+  stdin;
+  stdout;
+  stderr;
+  constructor() {
+    this.stdin = "";
+    this.stdout = "";
+    this.stderr = "";
+  }
 }
