@@ -1,7 +1,9 @@
 import { Eval } from "./eval";
 import { Files } from "./files";
+import { Symt } from "./symt";
 
 export class Compiler extends Eval {
+  static symt: Symt = new Symt(new Object());
   code: string;
   constructor() {
     super();

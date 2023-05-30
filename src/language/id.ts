@@ -1,3 +1,5 @@
+import { Compiler } from "../compiler";
+import { SymtT } from "../symt";
 import { Tag } from "../tag";
 import { Call } from "./call";
 import { Expr } from "./expr";
@@ -35,11 +37,34 @@ export class Id extends Stmt {
     }
   }
   eval() {
+    if (Compiler.symt.check(SymtT.CLASS, this.w[0])) {
+      const cName = Compiler.symt.get(SymtT.CLASS, this.w[0])?.k;
+      return this.emit(
+        "let " +
+          this.w
+            .slice(1, this.w.length - 1)
+            .map((tk) => tk.k)
+            .join("") +
+          " = new " +
+          cName +
+          "();\n"
+      );
+    }
     if (this.w[1].k === ";") {
       return this.emit(this.w[0].k + "();\n");
     } else if (this.w[1].k === "(") {
       return this.emit(new Call(this).eval() + ");\n");
     }
-    return this.emit(this.w[0].k + new Expr(this).eval() + ";\n");
+    return this.emit(
+      this.w
+        .slice(
+          0,
+          this.w.findIndex((tk) => tk.k === "=")
+        )
+        .map((tk) => tk.k)
+        .join("") +
+        new Expr(this).eval() +
+        ";\n"
+    );
   }
 }

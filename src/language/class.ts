@@ -1,4 +1,7 @@
+import { Compiler } from "../compiler";
+import { SymtT } from "../symt";
 import { Tag } from "../tag";
+import { Type } from "../type";
 import { Word } from "../word";
 import { Stmt } from "./stmt";
 
@@ -12,7 +15,7 @@ export class Class extends Stmt {
   }
   parse(tk) {
     this.root(tk, Tag.CLASS);
-    this.edge(Tag.ID);
+    Compiler.symt.push(SymtT.CLASS, this.edge(Tag.ID));
     this.edge("{");
     while (true) {
       this.edge([Tag.DTYPE, Tag.ID]);
@@ -37,9 +40,28 @@ export class Class extends Stmt {
         break;
       }
     }
-    this.edge(Tag.ID);
+    Compiler.symt.push(SymtT.CLASS, this.edge(Tag.ID));
     this.edge(";");
-    console.log(this.w);
   }
-  eval() {}
+  eval() {
+    let str = "class " + this.w[1].k + " {\n";
+    const cName = this.w[1]?.k;
+    const vName = this.w[this.w.length - 2]?.k;
+    let i = 3;
+    while (true) {
+      if (this.w[i].k === "}") break;
+      if (this.w[i].k === ";") {
+        str += ";\n";
+      } else if (this.w[i].k === ",") {
+        str += "; ";
+      } else if ((this.w[i] as Type)?.t !== Tag.DTYPE) {
+        if (!Compiler.symt.check(SymtT.CLASS, this.w[i])) {
+          str += this.w[i]?.k;
+        }
+      }
+      i++;
+    }
+    str += "} let " + vName + " = " + cName + ";\n";
+    return this.emit(str);
+  }
 }

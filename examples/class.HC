@@ -13,5 +13,5 @@ Exp2 a;
 a.a = 10;
 "%d\n", a.a;
 
-U8 var = a.a * 2 + 1;
-"var: %d", var;
+U8 variable = a.a * 2 + 1;
+"var: %d", variable;

@@ -33,8 +33,11 @@ export class Str extends Stmt {
         const tk = this.w[i] as any;
         if (!tk) break;
         if (tk?.k === ";") break;
+        if (tk?.k === ",") {
+          str += "+";
+        }
         if (tk?.k !== ",") {
-          str += "+" + this.w[i].k;
+          str += this.w[i].k;
         }
         i++;
       }

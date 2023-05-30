@@ -41,7 +41,7 @@ export abstract class Stmt {
     }
     this.w.push(tk);
   }
-  edge(T: Tag | Tag[] | string) {
+  edge(T: Tag | Tag[] | string): TokenType {
     const tk = this.c.lex();
     let val = tk.t;
     if (!val) {
@@ -59,6 +59,7 @@ export abstract class Stmt {
         );
     }
     this.w.push(tk);
+    return tk;
   }
   emit(str) {
     return str;
