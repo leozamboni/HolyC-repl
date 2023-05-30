@@ -66,12 +66,12 @@ export class Scanner {
       }
       return new Float(x);
     }
-    if (this.k && /[a-zA-Z]/i.test(this.k)) {
+    if (this.k && /[a-zA-Z#]/i.test(this.k)) {
       let b = "";
       do {
         b += this.k;
         this.read();
-      } while (this.k && /[a-zA-Z0-9_]/i.test(this.k));
+      } while (this.k && /[a-zA-Z0-9_#]/i.test(this.k));
       this.i--;
       const s = b;
       const f = this.cases[s];

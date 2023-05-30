@@ -27,3 +27,4 @@ export * from "./ret";
 export * from "./if";
 export * from "./else";
 export * from "./class";
+export * from "./def";

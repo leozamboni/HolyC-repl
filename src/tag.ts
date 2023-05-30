@@ -14,4 +14,5 @@ export enum Tag {
   IF,
   ELSE,
   CLASS,
+  DEFINE,
 }
