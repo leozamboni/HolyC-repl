@@ -2,6 +2,7 @@ import { Tag } from "./tag.js";
 import { Token } from "./token.js";
 
 export class Math extends Token {
+  static pp = new Math("++");
   static add = new Math("+");
   static sub = new Math("-");
   static div = new Math("/");

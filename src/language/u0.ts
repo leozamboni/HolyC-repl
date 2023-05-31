@@ -14,20 +14,53 @@ export class U0 extends Stmt {
   }
   parse(tk) {
     this.root(tk, Tag.DTYPE);
-    this.edge(Tag.ID);
-    if (this.c.k === "(") {
-      this.w.push(...new Proc(this.c).parse(this.c.lex()));
-    } else {
-      this.edge("=");
-      this.w.push(...new Expr(this.c).parse(this.c.lex()));
-      this.edge(";");
+    while (true) {
+      this.edge(Tag.ID);
+      if (this.c.charAHead("(")) {
+        this.w.push(...new Proc(this.c).parse(this.c.lex()));
+        break;
+      } else if (this.c.charAHead(",")) {
+        this.edge(",");
+      } else if (this.c.charAHead(";")) {
+        this.edge(";");
+        break;
+      } else {
+        this.edge("=");
+        this.w.push(...new Expr(this.c).parse(this.c.lex()));
+        if (this.c.charAHead(",")) {
+          this.edge(",");
+        } else {
+          this.edge(";");
+          break;
+        }
+      }
     }
   }
   eval() {
     if (this.w[2].k === "(") {
       return new Proc(this).eval();
     } else {
-      return this.emit("let " + this.w[1].k + new Expr(this).eval() + ";\n");
+      let out = "let ";
+      let i = 1;
+      while (true) {
+        if (this.w[i].k === "=") {
+          const expr = new Expr(this).eval();
+          out += expr;
+          i += expr.length;
+          if (!this.w[i]) {
+            out += "\n";
+            break;
+          }
+          continue;
+        }
+        if (this.w[i].k === ";") {
+          out += ";\n";
+          break;
+        }
+        out += this.w[i].k;
+        i++;
+      }
+      return this.emit(out);
     }
   }
 }

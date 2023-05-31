@@ -7,14 +7,24 @@ export class Expr extends Stmt {
     super(c);
   }
   parse(tk) {
+    if (tk.k === "++" || tk.k === "--") {
+      this.edge(Tag.MATH);
+    }
     this.root(tk, [Tag.ID, Tag.NUM, Tag.TRUE, Tag.FALSE]);
     if (this.c.charAHead(".")) {
       this.edge(".");
       this.edge(Tag.ID);
     }
+    if (this.c.tokenAhead("++")) {
+      this.edge(Tag.MATH);
+    }
     // eslint-disable-next-line no-constant-condition
     while (true) {
-      if (this.c.charAHead(";")) {
+      if (
+        this.c.charAHead(";") ||
+        this.c.charAHead(",") ||
+        this.c.tokenAhead(")")
+      ) {
         break;
       } else if (this.c.charAHead("(")) {
         this.w.push(...new Call(this.c).parse(this.c.lex()));

@@ -7,12 +7,9 @@ export class Add extends Stmt {
   }
   static k = "+";
   lex() {
-    return Math.add;
-  }
-  parse() {
-    throw new Error("Method not implemented.");
-  }
-  eval() {
-    this.emit("+");
+    if (this.c.charAHead("+")) {
+      this.c.i++;
+      return Math.pp;
+    } else return Math.add;
   }
 }

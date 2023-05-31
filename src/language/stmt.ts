@@ -29,9 +29,15 @@ export abstract class Stmt {
       val = tk.k;
     }
     if (Array.isArray(T)) {
-      if (!T.includes(val)) throw { id: 257, tk: tk, exp: T };
+      if (!T.includes(val))
+        throw new Error(
+          "unexpected token " + tk.k + " in line " + this.c.l + " type " + tk?.t
+        );
     } else {
-      if (val !== T) throw { id: 257, tk: tk, exp: T };
+      if (val !== T)
+        throw new Error(
+          "unexpected token " + tk.k + " in line " + this.c.l + " type " + tk?.t
+        );
     }
     this.w.push(tk);
   }
@@ -42,9 +48,15 @@ export abstract class Stmt {
       val = tk.k;
     }
     if (Array.isArray(T)) {
-      if (!T.includes(val)) throw { id: 256, tk: tk, exp: T };
+      if (!T.includes(val))
+        throw new Error(
+          "unexpected token " + tk.k + " in line " + this.c.l + " type " + tk?.t
+        );
     } else {
-      if (val !== T) throw { id: 256, tk: tk, exp: T };
+      if (val !== T)
+        throw new Error(
+          "unexpected token " + tk.k + " in line " + this.c.l + " type " + tk?.t
+        );
     }
     this.w.push(tk);
     return tk;
