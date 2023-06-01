@@ -1,4 +1,3 @@
-// HolyC class
 class Example {
 	U16 a, b, c;
 	U32 d, e, f;

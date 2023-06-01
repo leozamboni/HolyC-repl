@@ -1,7 +1,6 @@
 import { Tag } from "../tag";
 import { Utils } from "../utils";
 import { Word } from "../word";
-import { For } from "./for";
 import { Id } from "./id";
 import { Stmt } from "./stmt";
 import { Str } from "./str";
@@ -65,7 +64,6 @@ export class Block extends Stmt {
         }
 
         const w = Utils.get_line(i, this.w, end_c);
-        console.log(f, w);
         f = new f({ ...this, w: w });
         out += Utils.block_fix();
         out += f.eval();
@@ -74,55 +72,5 @@ export class Block extends Stmt {
     }
     Block.curr_block_level--;
     return this.emit(out);
-    // while (this.w[i] && this.w[i].k !== "}") {
-    //   let f = this.c.cases[this.w[i].k];
-    //   if (f) {
-    //     const endI =
-    //       this.w.slice(i, this.w.length).findIndex((e) => e?.k === ";") + 1;
-    //     const w = this.w.slice(i, i + endI);
-    //     f = new f({ ...this, w });
-    //     code += Utils.block_fix();
-    //     code += f.eval();
-    //     i = i + w.length - 1;
-    //   } else if ((this.w[i] as Word)?.t === Tag.STR) {
-    //     const endI =
-    //       this.w.slice(i, this.w.length).findIndex((e) => e?.k === ";") + 1;
-    //     const w = this.w.slice(i, i + endI);
-    //     let f = this.c.cases['"'];
-    //     if (f) {
-    //       f = new f({
-    //         ...this,
-    //         w,
-    //       });
-    //       code += Utils.block_fix();
-    //       code += f.eval();
-    //       i = i + w.length - 1;
-    //     }
-    //   } else if ((this.w[i] as Word)?.t === Tag.ID) {
-    //     const endI =
-    //       this.w.slice(i, this.w.length).findIndex((e) => e?.k === ";") + 1;
-    //     const w = this.w.slice(i, i + endI);
-
-    //     f = new Id({ ...this, w });
-    //     code += Utils.block_fix();
-    //     code += f.eval();
-    //     i = i + w.length - 1;
-    //   }
-    // else if ((this.w[i] as Word)?.t === Tag.FOR) {
-    //   console.log("FOR");
-
-    //   const endI =
-    //     this.w.slice(i, this.w.length).findIndex((e) => e?.k === ";") + 1;
-    //   const w = this.w.slice(i, i + endI);
-
-    //   f = new For({ ...this, w });
-    //   code += Utils.block_fix();
-    //   code += f.eval();
-    //   i = i + w.length - 1;
-    // }
-    // i++;
-    // }
-    // Block.curr_block_level--;
-    // return this.emit(out);
   }
 }

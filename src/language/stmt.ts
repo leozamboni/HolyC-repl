@@ -1,8 +1,8 @@
 import { Compiler } from "../compiler";
+import { dev } from "../holyc";
 import { TokenType } from "../interface";
 import { Tag } from "../tag";
 import { Word } from "../word";
-import { Block } from "./block";
 
 export interface Stmt {
   lex?(): TokenType | void;
@@ -29,15 +29,35 @@ export abstract class Stmt {
       val = tk.k;
     }
     if (Array.isArray(T)) {
-      if (!T.includes(val))
-        throw new Error(
-          "unexpected token " + tk.k + " in line " + this.c.l + " type " + tk?.t
-        );
+      if (!T.includes(val)) {
+        if (dev) {
+          throw new Error(
+            "unexpected token " +
+              tk.k +
+              " in line " +
+              this.c.l +
+              " type " +
+              tk?.t
+          );
+        } else {
+          throw { id: 257, tk: tk, exp: T };
+        }
+      }
     } else {
-      if (val !== T)
-        throw new Error(
-          "unexpected token " + tk.k + " in line " + this.c.l + " type " + tk?.t
-        );
+      if (val !== T) {
+        if (dev) {
+          throw new Error(
+            "unexpected token " +
+              tk.k +
+              " in line " +
+              this.c.l +
+              " type " +
+              tk?.t
+          );
+        } else {
+          throw { id: 257, tk: tk, exp: T };
+        }
+      }
     }
     this.w.push(tk);
   }
@@ -48,15 +68,35 @@ export abstract class Stmt {
       val = tk.k;
     }
     if (Array.isArray(T)) {
-      if (!T.includes(val))
-        throw new Error(
-          "unexpected token " + tk.k + " in line " + this.c.l + " type " + tk?.t
-        );
+      if (!T.includes(val)) {
+        if (dev) {
+          throw new Error(
+            "unexpected token " +
+              tk.k +
+              " in line " +
+              this.c.l +
+              " type " +
+              tk?.t
+          );
+        } else {
+          throw { id: 256, tk: tk, exp: T };
+        }
+      }
     } else {
-      if (val !== T)
-        throw new Error(
-          "unexpected token " + tk.k + " in line " + this.c.l + " type " + tk?.t
-        );
+      if (val !== T) {
+        if (dev) {
+          throw new Error(
+            "unexpected token " +
+              tk.k +
+              " in line " +
+              this.c.l +
+              " type " +
+              tk?.t
+          );
+        } else {
+          throw { id: 256, tk: tk, exp: T };
+        }
+      }
     }
     this.w.push(tk);
     return tk;

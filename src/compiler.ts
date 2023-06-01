@@ -1,6 +1,6 @@
-import { threadId } from "worker_threads";
 import { Eval } from "./eval";
 import { Files } from "./files";
+import { dev } from "./holyc";
 import { TokenType } from "./interface";
 import { Symt } from "./symt";
 import { Tag } from "./tag";
@@ -14,21 +14,25 @@ export class Compiler extends Eval {
   }
   run() {
     while (this.i < Compiler.files.stdin.length) {
-      // try {
-      Compiler.files.stdout += this.eval(this.parse(this.lex()));
-      // } catch (err: any) {
-      //   switch (err.id) {
-      //     case 257:
-      //     case 256:
-      //       Compiler.files.stderr +=
-      //         "Parser: unexpected token " + err.tk.k + " in line " + this.l;
-      //       break;
-      //   }
-      //   if (Tag[err.exp]) {
-      //     Compiler.files.stderr += " expected " + Tag[err.exp] + " ";
-      //   }
-      //   throw new Error((Compiler.files.stderr += "\n"));
-      // }
+      if (dev) {
+        Compiler.files.stdout += this.eval(this.parse(this.lex()));
+      } else {
+        try {
+          Compiler.files.stdout += this.eval(this.parse(this.lex()));
+        } catch (err: any) {
+          switch (err.id) {
+            case 257:
+            case 256:
+              Compiler.files.stderr +=
+                "Parser: unexpected token " + err.tk.k + " in line " + this.l;
+              break;
+          }
+          if (Tag[err.exp]) {
+            Compiler.files.stderr += " expected " + Tag[err.exp] + " ";
+          }
+          Compiler.files.stderr += "\n";
+        }
+      }
     }
   }
   interpret() {

@@ -1,10 +1,8 @@
-// Allows "5 < 1 < 2 + 1 < 20" instead of "5 < 1 && 1 < 2 + 1 && 1 + 1 < 20";
 if (5 < 1 < 2 + 1 < 20)
 {
 	"true\n";
 }
 
-// Conditionals with logicals;
 if (TRUE)
 {
 	if (1 > 2)
@@ -26,7 +24,6 @@ if (TRUE > FALSE)
 	"TRUE > FALSE\n";
 }
 
-// Conditionals with variables;
 U8 A = 1;
 U8 B = 2;
 if (A < B)
@@ -45,12 +42,11 @@ if (A == FALSE)
 	"A == 0\n";
 }
 
-// Conditionals with math expressions.
 if (1 + 2 * 3 > 9)
 {
 	"1 + 2 * 3 > 9\n";
 }
-else if (1 + 2 * 3 > A + 6)
+else if (1 + 2 * 3 > A + 6
 {
 	"1 + 2 * 3 > A + 8\n";
 }

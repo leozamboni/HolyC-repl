@@ -1,4 +1,3 @@
-// HolyC Fibonacci
 U0
 Fibonacci()
 {
