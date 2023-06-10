@@ -34,7 +34,7 @@ export class Class extends Stmt {
           }
         }
       }
-      if (this.c.tokenAhead("}")) {
+      if (this.c.checkNext("}")) {
         this.edge("}");
         break;
       }

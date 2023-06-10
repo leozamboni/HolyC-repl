@@ -8,13 +8,9 @@ export class And extends Stmt {
   }
   static k = "&";
   lex() {
-    if (this.c.charAHead("&")) return Logical.and;
-    else return new Token("&");
-  }
-  parse() {
-    throw new Error("Method not implemented.");
-  }
-  eval() {
-    throw new Error("Method not implemented.");
+    if (this.c.charAHead("&")) {
+      this.c.read();
+      return Logical.and;
+    } else return new Token("&");
   }
 }

@@ -15,7 +15,7 @@ export class Else extends Stmt {
   }
   parse(tk) {
     this.root(tk, Tag.ELSE);
-    if (!this.c.tokenAhead("if")) {
+    if (!this.c.checkNext("if")) {
       this.w.push(...new Block(this.c).parse(this.c.lex()));
     }
     return this.w;

@@ -9,10 +9,4 @@ export class Div extends Stmt {
   lex() {
     return Math.div;
   }
-  parse() {
-    throw new Error("Method not implemented.");
-  }
-  eval() {
-    throw new Error("Method not implemented.");
-  }
 }

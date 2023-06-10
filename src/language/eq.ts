@@ -9,7 +9,7 @@ export class Eq extends Stmt {
   static k = "=";
   lex() {
     if (this.c.charAHead("=")) {
-      this.c.i++;
+      this.c.read();
       return Logical.eq;
     } else return new Token("=");
   }

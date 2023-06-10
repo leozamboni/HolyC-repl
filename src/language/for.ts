@@ -17,7 +17,7 @@ export class For extends Stmt {
     this.root(tk, Tag.FOR);
     this.edge("(");
     this.edge(Tag.ID);
-    if (this.c.tokenAhead("=")) {
+    if (this.c.checkNext("=")) {
       this.edge("=");
       this.w.push(...new Expr(this.c).parse(this.c.lex()));
       this.edge(";");

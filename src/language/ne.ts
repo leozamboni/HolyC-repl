@@ -8,7 +8,9 @@ export class Ne extends Stmt {
   }
   static k = "!";
   lex() {
-    if (this.c.charAHead("=")) return Logical.ne;
-    else return new Token("!");
+    if (this.c.charAHead("=")) {
+      this.c.read();
+      return Logical.ne;
+    } else return new Token("!");
   }
 }

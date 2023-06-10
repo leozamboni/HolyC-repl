@@ -1,4 +1,3 @@
-import { Compiler } from "../compiler";
 import { SymtT } from "../symt";
 import { Tag } from "../tag";
 import { Call } from "./call";
@@ -27,7 +26,7 @@ export class Id extends Stmt {
         this.edge(")");
       }
       this.edge(";");
-    } else if (this.c.tokenAhead("=")) {
+    } else if (this.c.checkNext("=")) {
       this.edge("=");
       this.w.push(...new Expr(this.c).parse(this.c.lex()));
       this.edge(";");

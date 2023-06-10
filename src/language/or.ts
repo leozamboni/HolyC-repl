@@ -9,7 +9,7 @@ export class Or extends Stmt {
   static k = "|";
   lex() {
     if (this.c.charAHead("|")) {
-      this.c.i++; // FIX
+      this.c.read();
       return Logical.or;
     } else return new Token("|");
   }

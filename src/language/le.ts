@@ -7,8 +7,10 @@ export class Le extends Stmt {
   }
   static k = "<";
   lex() {
-    if (this.c.charAHead("=")) return Logical.le;
-    else return Logical.l;
+    if (this.c.charAHead("=")) {
+      this.c.read();
+      return Logical.le;
+    } else return Logical.l;
   }
   parse() {
     throw new Error("Method not implemented.");

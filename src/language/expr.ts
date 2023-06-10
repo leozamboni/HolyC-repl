@@ -15,7 +15,7 @@ export class Expr extends Stmt {
       this.edge(".");
       this.edge(Tag.ID);
     }
-    if (this.c.tokenAhead("++")) {
+    if (this.c.checkNext("++")) {
       this.edge(Tag.MATH);
     }
     // eslint-disable-next-line no-constant-condition
@@ -23,7 +23,7 @@ export class Expr extends Stmt {
       if (
         this.c.charAHead(";") ||
         this.c.charAHead(",") ||
-        this.c.tokenAhead(")")
+        this.c.checkNext(")")
       ) {
         break;
       } else if (this.c.charAHead("(")) {

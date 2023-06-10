@@ -7,8 +7,10 @@ export class Ge extends Stmt {
   }
   static k = ">";
   lex() {
-    if (this.c.charAHead("=")) return Logical.ge;
-    else return Logical.g;
+    if (this.c.charAHead("=")) {
+      this.c.read();
+      return Logical.ge;
+    } else return Logical.g;
   }
   parse() {
     throw new Error("Method not implemented.");

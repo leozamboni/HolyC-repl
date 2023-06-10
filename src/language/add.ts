@@ -8,7 +8,7 @@ export class Add extends Stmt {
   static k = "+";
   lex() {
     if (this.c.charAHead("+")) {
-      this.c.i++;
+      this.c.read();
       return Math.pp;
     } else return Math.add;
   }

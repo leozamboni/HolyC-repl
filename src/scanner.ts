@@ -18,10 +18,10 @@ export class Scanner {
   read() {
     this.k = Compiler.files.stdin[this.i++];
   }
-  charAHead(c) {
+  charAHead(c): boolean {
     return Compiler.files.stdin[this.i] === c;
   }
-  tokenAhead(w) {
+  checkNext(w): boolean {
     const tk = this.scan();
     if (tk.k) {
       this.i -= tk.k.length;
@@ -34,15 +34,15 @@ export class Scanner {
       if (this.k === "\n") this.l++;
       this.read();
     }
-    if (this.k === "\"" || this.k === "'") {
-      let b = "\"";
+    if (this.k === '"' || this.k === "'") {
+      let b = '"';
       this.read();
       do {
         b += this.k;
         this.read();
-      } while (this.k && !(this.k === "\"" || this.k === "'"));
-      this.k = b + "\"";
-      const f = this.cases["\""];
+      } while (this.k && !(this.k === '"' || this.k === "'"));
+      this.k = b + '"';
+      const f = this.cases['"'];
       if (f) return new f(this).lex();
       return new Word(this.k, Tag.STR);
     }
