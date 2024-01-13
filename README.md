@@ -1,3 +1,5 @@
 HolyC REPL
 
-How to use? Just `FILE=filedir pnpm repl`
+`yarn build`
+
+How to use? Just `yarn repl "$(cat ./examples/hello-world.HC)"`
